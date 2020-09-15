@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Component">
+      <UniqueIdentifier>{e43d858c-2729-46d0-b91a-f02e020ef685}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Component">
+      <UniqueIdentifier>{3f6f420c-df1e-489c-8d99-1137444d212b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{183ff9e6-06bd-4578-9ec8-094379b13362}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Shadows">
+      <UniqueIdentifier>{15e808f4-8bb8-4f44-a1bb-b42cc73ec5c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Component\Light">
+      <UniqueIdentifier>{58f3dc8e-cff8-4c33-8d86-7b8425673367}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Component\Light">
+      <UniqueIdentifier>{ae09e5c2-3ab6-4e1d-a6aa-88e03f1833c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Component\Shadow">
+      <UniqueIdentifier>{afba90d1-b310-4a8a-82eb-45fdb8c5ff3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Component\Shadow">
+      <UniqueIdentifier>{d81ef95a-c8b9-4979-9efd-c1d14c4d8281}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Component\Model">
+      <UniqueIdentifier>{fcfe8020-e71a-465c-a115-1fabce54ee44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Component\Model">
+      <UniqueIdentifier>{0514aea3-52e3-44a6-8234-71ac5cd8597a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Shader.cpp">
+      <Filter>Source Files\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Window.cpp">
+      <Filter>Source Files\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Camera.cpp">
+      <Filter>Source Files\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Light.cpp">
+      <Filter>Source Files\Component\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PointLight.cpp">
+      <Filter>Source Files\Component\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SpotLight.cpp">
+      <Filter>Source Files\Component\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DirectionalLight.cpp">
+      <Filter>Source Files\Component\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ShadowMap.cpp">
+      <Filter>Source Files\Component\Shadow</Filter>
+    </ClCompile>
+    <ClCompile Include="src\OmniShadowMap.cpp">
+      <Filter>Source Files\Component\Shadow</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model.cpp">
+      <Filter>Source Files\Component\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Mesh.cpp">
+      <Filter>Source Files\Component\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Material.cpp">
+      <Filter>Source Files\Component\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Texture.cpp">
+      <Filter>Source Files\Component\Model</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Shader.h">
+      <Filter>Header Files\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Window.h">
+      <Filter>Header Files\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Camera.h">
+      <Filter>Header Files\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GeneralConsts.h">
+      <Filter>Header Files\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Light.h">
+      <Filter>Header Files\Component\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PointLight.h">
+      <Filter>Header Files\Component\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SpotLight.h">
+      <Filter>Header Files\Component\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ShadowMap.h">
+      <Filter>Header Files\Component\Shadow</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DirectionalLight.h">
+      <Filter>Header Files\Component\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Material.h">
+      <Filter>Header Files\Component\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Mesh.h">
+      <Filter>Header Files\Component\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Model.h">
+      <Filter>Header Files\Component\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Texture.h">
+      <Filter>Header Files\Component\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OmniShadowMap.h">
+      <Filter>Header Files\Component\Shadow</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Shaders\Shadows\directional_shadow_map.frag">
+      <Filter>Shaders\Shadows</Filter>
+    </None>
+    <None Include="Shaders\Shadows\directional_shadow_map.vert">
+      <Filter>Shaders\Shadows</Filter>
+    </None>
+    <None Include="Shaders\Shadows\omni_shadow_map.frag">
+      <Filter>Shaders\Shadows</Filter>
+    </None>
+    <None Include="Shaders\Shadows\omni_shadow_map.vert">
+      <Filter>Shaders\Shadows</Filter>
+    </None>
+    <None Include="Shaders\Shadows\omni_shadow_map.geom">
+      <Filter>Shaders\Shadows</Filter>
+    </None>
+    <None Include="Shaders\shader.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Shaders\shader.vert">
+      <Filter>Shaders</Filter>
+    </None>
+  </ItemGroup>
+</Project>
