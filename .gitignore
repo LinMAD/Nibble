@@ -1,0 +1,73 @@
+# Conan files
+conanbuildinfo.cmake
+conanbuildinfo.txt
+conaninfo.txt
+
+# IDE
+.idea/
+.vs
+
+# Cmake
+CMakeFiles
+CMakeCache.txt
+cmake-build-debug
+cmake-build-release
+cmake_install.cmake
+Makefile
+
+# Build files
+PlainTetris.cbp
+PlainTetris
+
+# Mac
+.DS_Store
+assets/.DS_Store
+
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Visual studio artifacts
+Debug
+x64
+x86
+packages
+Release
+nuget.config
+*.nupkg
+
+# Project
+bin
+int
+
+# Env relted
+*.user
