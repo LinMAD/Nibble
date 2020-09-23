@@ -96,7 +96,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Core\Application.h" />
-    <ClInclude Include="src\Core\Entry.h" />
+    <ClInclude Include="src\Core\ApplicationMainEntry.h" />
+    <ClInclude Include="src\Events\Event.h" />
+    <ClInclude Include="src\Events\EventBus.h" />
+    <ClInclude Include="src\Events\EventHandler.h" />
+    <ClInclude Include="src\Events\Window\WindowCloseEvent.h" />
+    <ClInclude Include="src\Events\Window\WindowEvent.h" />
+    <ClInclude Include="src\Events\Window\WindowResizeEvent.h" />
     <ClInclude Include="src\Traceability\Logger.h" />
     <ClInclude Include="src\Core\MacroPlatform.h" />
     <ClInclude Include="src\Core\MacroCore.h" />

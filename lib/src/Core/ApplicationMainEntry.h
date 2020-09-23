@@ -8,7 +8,7 @@ extern Nibble::Application* Nibble::CreateApplicaiton();
 int main(int argc, char** argv)
 {
 	Nibble::Logger::Init();
-	LOGGER_CORE_INFO("Entry point, logger initialized...");
+	LOGGER_CORE_DEBUG("Logger initialized...");
 
 	auto app = Nibble::CreateApplicaiton();
 

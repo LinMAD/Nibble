@@ -35,6 +35,9 @@
     <ClInclude Include="src\Core\Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Core\ApplicationMainEntry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="src\Nibble.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -44,10 +47,25 @@
     <ClInclude Include="src\Core\MacroPlatform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Core\Entry.h">
+    <ClInclude Include="src\Traceability\Logger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Traceability\Logger.h">
+    <ClInclude Include="src\Events\Event.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Events\EventBus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Events\EventHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Events\Window\WindowResizeEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Events\Window\WindowEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Events\Window\WindowCloseEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

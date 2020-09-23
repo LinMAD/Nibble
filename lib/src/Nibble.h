@@ -5,5 +5,5 @@
 #include "Traceability/Logger.h"
 
 // Entry point for other applications
-#include "Core/Entry.h"
+#include "Core/ApplicationMainEntry.h"
 // End of entry point
