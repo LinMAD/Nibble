@@ -4,6 +4,7 @@
 #ifdef _WIN32
 
 #ifdef _WIN64
+#undef NIBBLE_PLATFORM_WINDOWS
 #define NIBBLE_PLATFORM_WINDOWS
 #else
 #error "x86 not supported!"

@@ -4,8 +4,12 @@
 
 extern Nibble::Application* Nibble::CreateApplicaiton();
 
+// Main function where all components (singletons) must be initialized
 int main(int argc, char** argv)
 {
+	Nibble::Logger::Init();
+	LOGGER_CORE_INFO("Entry point, logger initialized...");
+
 	auto app = Nibble::CreateApplicaiton();
 
 	app->Run();

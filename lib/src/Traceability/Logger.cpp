@@ -5,6 +5,14 @@ namespace Nibble {
 	std::shared_ptr<spdlog::logger> Logger::s_CoreLogger;
 	std::shared_ptr<spdlog::logger> Logger::s_ClientLogger;
 
+	Logger::Logger()
+	{
+	}
+
+	Logger::~Logger()
+	{
+	}
+
 	void Logger::Init()
 	{
 		// https://github.com/gabime/spdlog/wiki/3.-Custom-formatting
@@ -13,7 +21,7 @@ namespace Nibble {
 		// %T - ISO 8601 time format (HH:MM:SS), equivalent to %H:%M:%S
 		// %l - The log level of the message
 		// %v - The actual text to log ("debug", "info", etc)
-		spdlog::set_pattern("%^|%T| %l:%n -> %v");
+		spdlog::set_pattern("%^[%l]|%T| %n: %v");
 
 		s_CoreLogger = spdlog::stdout_color_mt("Nibble");
 		s_ClientLogger = spdlog::stdout_color_mt("Application");
