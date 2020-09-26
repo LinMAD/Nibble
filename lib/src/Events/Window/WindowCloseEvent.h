@@ -19,7 +19,7 @@ namespace Nibble {
 
 		std::string ToString() const override
 		{
-			return "WindowCloseEvent: Gracefully closing window..."
+			return "WindowCloseEvent: Gracefully closing window...";
 		}
 	};
 }

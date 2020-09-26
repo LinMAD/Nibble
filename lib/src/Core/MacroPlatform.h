@@ -16,3 +16,9 @@
 
 #endif //_WIN32
 // End of platform check
+
+// Build type
+#ifdef DEBUG
+#define NIBBLE_DEBUG
+#endif // DEBUG
+// End build type

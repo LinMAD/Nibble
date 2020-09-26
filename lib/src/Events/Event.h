@@ -1,9 +1,5 @@
 #pragma once
 
-#include <string>
-#include <sstream>
-#include <functional>
-
 namespace Nibble {
 	enum class EventType
 	{

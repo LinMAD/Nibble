@@ -1,7 +1,4 @@
-#include <functional>
-#include <queue>
-#include <vector>
-#include "Event.h"
+#include "Events/Event.h"
 
 namespace Nibble {
 	class EventBus

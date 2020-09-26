@@ -1,5 +1,4 @@
-#include <iostream>
-#include "EventBus.h"
+#include "Events/EventBus.h"
 
 namespace Nibble {
 	class AbstractEventHandler
