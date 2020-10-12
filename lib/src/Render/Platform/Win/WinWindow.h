@@ -1,7 +1,6 @@
 #pragma once
 
 #include <GLFW/glfw3.h>
-
 #include "Render/IWindow.h"
 
 namespace Nibble {
@@ -12,19 +11,27 @@ namespace Nibble {
 			std::string Title;
 			unsigned int Width, Height;
 			bool VSync;
-
-			EventCallbackFunc EventCallback;
 		};
 
 		WindowData m_data;
 		GLFWwindow* m_window;
 
+		bool m_isPossibleCloseWindow = true;
+		bool m_isClosed = false;
+
 		virtual void Init(const WindowConfiguration& props);
-		virtual void Shutdown();
+
+		inline static auto WindowResizeCallback(
+			GLFWwindow* win,
+			int w,
+			int h
+		) -> void;
+		inline static auto WindowCloseCallback(
+			GLFWwindow* win
+		) -> void;
 	public:
 		WinWindow();
-		WinWindow(const WindowConfiguration& props);
-		virtual ~WinWindow();
+		WinWindow(const WindowConfiguration& cfg);
 
 		virtual IWindow* Create(const WindowConfiguration& props = WindowConfiguration()) override;
 
@@ -40,12 +47,8 @@ namespace Nibble {
 			return m_data.Height;
 		}
 
-		inline void SetEventCallback(const EventCallbackFunc& callback) override
-		{
-			m_data.EventCallback = callback;
-		}
-
 		void SetVSync(bool enabled) override;
 		bool IsVSync() const override;
+		bool IsShootdown() const override;
 	};
 }

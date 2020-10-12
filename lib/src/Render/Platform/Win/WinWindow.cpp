@@ -27,28 +27,41 @@ namespace Nibble {
 			nullptr,
 			nullptr
 		);
+
 		glfwMakeContextCurrent(m_window);
 		glfwSetWindowUserPointer(m_window, &m_data);
 		SetVSync(true);
+
+		glfwSetWindowSizeCallback(m_window, WindowResizeCallback);
+		glfwSetWindowCloseCallback(m_window, WindowCloseCallback);
 	}
 
-	void WinWindow::Shutdown()
+	inline auto WinWindow::WindowResizeCallback(GLFWwindow* win, int w, int h) -> void
 	{
-		glfwDestroyWindow(m_window);
+		LOGGER_CORE_TRACE("Handling callback of WindowResizeCallback...");
+
+		glViewport(0, 0, (GLsizei)w, (GLsizei)h);
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glMatrixMode(GL_MODELVIEW);
+	}
+
+	inline auto WinWindow::WindowCloseCallback(GLFWwindow* win) -> void
+	{
+		WinWindow& winWindow = *(WinWindow*)glfwGetWindowUserPointer(win);
+
+		if (winWindow.m_isPossibleCloseWindow)
+			glfwDestroyWindow(win);
 	}
 
 	WinWindow::WinWindow()
 	{
+
 	}
 
 	WinWindow::WinWindow(const WindowConfiguration& cfg)
 	{
 		Init(cfg);
-	}
-
-	WinWindow::~WinWindow()
-	{
-		Shutdown();
 	}
 
 	IWindow* WinWindow::Create(const WindowConfiguration& cfg)
@@ -60,6 +73,7 @@ namespace Nibble {
 	{
 		glfwPollEvents();
 		glfwSwapBuffers(m_window);
+		m_isClosed = glfwWindowShouldClose(m_window);
 	}
 
 	void WinWindow::SetVSync(bool enabled)
@@ -73,5 +87,9 @@ namespace Nibble {
 	bool WinWindow::IsVSync() const
 	{
 		return m_data.VSync;
+	}
+	bool WinWindow::IsShootdown() const
+	{
+		return m_isClosed;
 	}
 }

@@ -48,7 +48,7 @@ Because it's fair enough, during researches and implementation I looking for man
 Research and refactor old codebase to have a nice structure like that list:
 - ~~Entry point~~
 - ~~Logger~~
-- ~~Event bus system for user I/O~~
+- Event bus system for user I/O
 - Files (I/O), VFS (Virutal file system) support
 - Graphic related layers
 	- Applicaiton layer

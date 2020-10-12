@@ -109,12 +109,6 @@
   <ItemGroup>
     <ClInclude Include="src\Core\Application.h" />
     <ClInclude Include="src\Core\ApplicationMainEntry.h" />
-    <ClInclude Include="src\Events\Event.h" />
-    <ClInclude Include="src\Events\EventBus.h" />
-    <ClInclude Include="src\Events\EventHandler.h" />
-    <ClInclude Include="src\Events\Window\WindowCloseEvent.h" />
-    <ClInclude Include="src\Events\Window\WindowEvent.h" />
-    <ClInclude Include="src\Events\Window\WindowResizeEvent.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\Render\IWindow.h" />
     <ClInclude Include="src\Render\Platform\Win\WinWindow.h" />
