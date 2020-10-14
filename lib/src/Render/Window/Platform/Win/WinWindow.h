@@ -1,7 +1,7 @@
 #pragma once
 
 #include <GLFW/glfw3.h>
-#include "Render/IWindow.h"
+#include "Render/Window/IWindow.h"
 
 namespace Nibble {
 	class WinWindow : public IWindow {

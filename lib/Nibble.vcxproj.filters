@@ -53,10 +53,10 @@
     <ClInclude Include="src\pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Render\IWindow.h">
+    <ClInclude Include="src\Render\Window\Platform\Win\WinWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Render\Platform\Win\WinWindow.h">
+    <ClInclude Include="src\Render\Window\IWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -70,7 +70,7 @@
     <ClCompile Include="src\pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Render\Platform\Win\WinWindow.cpp">
+    <ClCompile Include="src\Render\Window\Platform\Win\WinWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

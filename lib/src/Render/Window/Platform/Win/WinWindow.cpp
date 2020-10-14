@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "Render/Platform/Win/WinWindow.h"
+#include "Render/Window/Platform/Win/WinWindow.h"
 
 namespace Nibble {
 	static bool s_GLFWInitialized = false;

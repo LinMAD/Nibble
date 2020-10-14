@@ -2,8 +2,6 @@
 
 #include "Core/MacroPlatform.h"
 
-#define BIT_SHIFT(x) (1 << x) //Macros for bit shifting
-
 // Export lib for platform
 #ifdef NIBBLE_PLATFORM_WINDOWS
 

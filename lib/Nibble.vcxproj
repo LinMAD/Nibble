@@ -110,8 +110,8 @@
     <ClInclude Include="src\Core\Application.h" />
     <ClInclude Include="src\Core\ApplicationMainEntry.h" />
     <ClInclude Include="src\pch.h" />
-    <ClInclude Include="src\Render\IWindow.h" />
-    <ClInclude Include="src\Render\Platform\Win\WinWindow.h" />
+    <ClInclude Include="src\Render\Window\IWindow.h" />
+    <ClInclude Include="src\Render\Window\Platform\Win\WinWindow.h" />
     <ClInclude Include="src\Traceability\Logger.h" />
     <ClInclude Include="src\Core\MacroPlatform.h" />
     <ClInclude Include="src\Core\MacroCore.h" />
@@ -125,7 +125,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">pch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\Render\Platform\Win\WinWindow.cpp" />
+    <ClCompile Include="src\Render\Window\Platform\Win\WinWindow.cpp" />
     <ClCompile Include="src\Traceability\Logger.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

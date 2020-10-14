@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Core/MacroCore.h"
-#include "Render/Platform/Win/WinWindow.h"
+#include "Render/Window/Platform/Win/WinWindow.h"
 
 namespace Nibble {
 	class NIBBLE_API Application
