@@ -7,6 +7,8 @@
 namespace Nibble {
 	EventBus EventBus::s_Instance;
 
+	// TODO Dispatch event by event type and category
+
 	void EventBus::RegisterEvent(Event* e)
 	{
 		m_Events.push_back(e);
@@ -24,8 +26,7 @@ namespace Nibble {
 	{
 		for (Event* e : m_Events)
 		{
-			if (e->Handle())
-				RemoveEvent(e);
+			if (e->IsHandled()) RemoveEvent(e);
 		}
 	}
 }

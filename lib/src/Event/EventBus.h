@@ -23,3 +23,6 @@ namespace Nibble {
 		void HandleEvents();
 	};
 }
+
+#define EVENT_BUS_ADD_EVENT(...)::Nibble::EventBus::GetInstance().RegisterEvent(__VA_ARGS__);
+

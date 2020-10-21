@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Render/Window/Platform/Win/WinWindow.h"
+#include "Event/Window/WindowResizeEvent.h"
 
 namespace Nibble {
 	static bool s_GLFWInitialized = false;
@@ -38,16 +39,20 @@ namespace Nibble {
 
 	inline auto WinWindow::WindowResizeCallback(GLFWwindow* win, int w, int h) -> void
 	{
-		LOGGER_CORE_TRACE("Handling callback of WindowResizeCallback...");
-
 		glViewport(0, 0, (GLsizei)w, (GLsizei)h);
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		glMatrixMode(GL_MODELVIEW);
+
+		WindowResizeEvent e(w, h);
+		e.SetIsHandled();
+
+		EVENT_BUS_ADD_EVENT(&e);
 	}
 
 	inline auto WinWindow::WindowCloseCallback(GLFWwindow* win) -> void
 	{
+		// TODO Add new event and handle GLFW window closing in app main loop
 		WinWindow& winWindow = *(WinWindow*)glfwGetWindowUserPointer(win);
 
 		if (winWindow.m_isPossibleCloseWindow)
