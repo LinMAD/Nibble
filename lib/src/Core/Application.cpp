@@ -1,7 +1,8 @@
+#include <GLFW/glfw3.h>
+
 #include "pch.h"
 #include "Core/Application.h"
 #include "Traceability/Logger.h"
-#include <GLFW/glfw3.h>
 
 Nibble::Application::Application()
 {

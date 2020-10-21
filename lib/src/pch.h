@@ -18,3 +18,4 @@
 #include <unordered_set>
 
 #include "Traceability/Logger.h"
+#include "Event/EventBus.h"
