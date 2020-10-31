@@ -5,8 +5,6 @@
 
 namespace Nibble {
 	class NIBBLE_API WindowResizeEvent : public Event {
-	private:
-		unsigned int m_Width, m_Height;
 	public:
 		WindowResizeEvent(
 			unsigned int width,
@@ -24,8 +22,14 @@ namespace Nibble {
 
 		// Inherited via Event
 		virtual void SetIsHandled() override;
-		virtual const char* GetName() const override;
-		virtual int GetCategoryFlags() const override;
-		virtual EventType GetEventType() const override;
+		virtual const char* GetName() override;
+		virtual int GetCategoryFlags() override;
+		virtual EventType GetEventType() override;
+	protected:
+		const char* m_name = "WindowResizeEvent";
+		int m_categoryFlags = EventCategory::Window;
+		EventType m_eventType = EventType::WindowResize;
+	private:
+		unsigned int m_Width, m_Height;
 	};
 }

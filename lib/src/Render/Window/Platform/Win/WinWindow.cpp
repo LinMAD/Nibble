@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Render/Window/Platform/Win/WinWindow.h"
 #include "Event/Window/WindowResizeEvent.h"
+#include "Event/Window/WindowsCloseEvent.h"
 
 namespace Nibble {
 	static bool s_GLFWInitialized = false;
@@ -39,29 +40,26 @@ namespace Nibble {
 
 	inline auto WinWindow::WindowResizeCallback(GLFWwindow* win, int w, int h) -> void
 	{
+		auto e = std::make_shared<WindowResizeEvent>(w, h);
+		EVENT_BUS_ADD_EVENT(e);
+
 		glViewport(0, 0, (GLsizei)w, (GLsizei)h);
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		glMatrixMode(GL_MODELVIEW);
 
-		WindowResizeEvent e(w, h);
-		e.SetIsHandled();
-
-		EVENT_BUS_ADD_EVENT(&e);
+		e->SetIsHandled();
 	}
 
 	inline auto WinWindow::WindowCloseCallback(GLFWwindow* win) -> void
 	{
-		// TODO Add new event and handle GLFW window closing in app main loop
 		WinWindow& winWindow = *(WinWindow*)glfwGetWindowUserPointer(win);
 
-		if (winWindow.m_isPossibleCloseWindow)
-			glfwDestroyWindow(win);
-	}
+		if (!winWindow.m_isPossibleCloseWindow) return;
 
-	WinWindow::WinWindow()
-	{
+		glfwDestroyWindow(win);
 
+		EVENT_BUS_ADD_EVENT(std::make_shared<WindowsCloseEvent>());
 	}
 
 	WinWindow::WinWindow(const WindowConfiguration& cfg)
@@ -78,7 +76,14 @@ namespace Nibble {
 	{
 		glfwPollEvents();
 		glfwSwapBuffers(m_window);
-		m_isClosed = glfwWindowShouldClose(m_window);
+
+		if (!glfwWindowShouldClose(m_window)) return;
+
+		m_isPossibleCloseWindow = false;
+
+		std::shared_ptr<Event> winClose = Nibble::EventBus::GetInstance().DispatchEvent(Event::EventType::WindowClose);
+		if (winClose != nullptr)
+			winClose->SetIsHandled();
 	}
 
 	void WinWindow::SetVSync(bool enabled)
@@ -92,9 +97,5 @@ namespace Nibble {
 	bool WinWindow::IsVSync() const
 	{
 		return m_data.VSync;
-	}
-	bool WinWindow::IsShootdown() const
-	{
-		return m_isClosed;
 	}
 }

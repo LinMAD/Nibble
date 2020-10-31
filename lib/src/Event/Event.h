@@ -1,11 +1,11 @@
 #pragma once
 
+#include "Core/MacroCore.h"
+
 namespace Nibble {
 	class NIBBLE_API Event {
-	protected:
-		bool m_IsHandled = false;
 	public:
-		enum class EventType
+		enum EventType
 		{
 			None = 0,
 			WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,
@@ -29,13 +29,22 @@ namespace Nibble {
 			return m_IsHandled;
 		}
 
-		virtual const char* GetName() const = 0;
-		virtual int GetCategoryFlags() const = 0;
-		virtual EventType GetEventType() const = 0;
+		virtual const char* GetName() = 0;
+		virtual int GetCategoryFlags() = 0;
+		virtual EventType GetEventType() = 0;
 
 		inline bool IsInCategory(EventCategory category)
 		{
 			return GetCategoryFlags() & category;
 		}
+		inline bool IsType(EventType type)
+		{
+			return GetEventType() == type;
+		}
+	protected:
+		bool m_IsHandled;
+		const char* m_Name;
+		int m_CategoryFlags;
+		EventType m_EventType;
 	};
 }

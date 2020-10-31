@@ -30,7 +30,6 @@ namespace Nibble {
 
 		virtual void SetVSync(bool enabled) = 0;
 		virtual bool IsVSync() const = 0;
-		virtual bool IsShootdown() const = 0;
 
 		virtual IWindow* Create(const WindowConfiguration& props = WindowConfiguration()) = 0;
 	};

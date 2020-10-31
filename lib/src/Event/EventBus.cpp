@@ -7,26 +7,46 @@
 namespace Nibble {
 	EventBus EventBus::s_Instance;
 
-	// TODO Dispatch event by event type and category
+	std::shared_ptr<Event> EventBus::DispatchEvent(Event::EventType type)
+	{
+		std::shared_ptr<Event> neededEvent = nullptr;
 
-	void EventBus::RegisterEvent(Event* e)
+		if (m_Events.size() == 0)
+			return neededEvent;
+
+		for (std::shared_ptr<Event> e : m_Events)
+		{
+			if (e != nullptr && e->IsType(type))
+			{
+				neededEvent = e;
+				break;
+			}
+		}
+
+		return neededEvent;
+	}
+
+	void EventBus::RegisterEvent(std::shared_ptr<Event> e)
 	{
 		m_Events.push_back(e);
 	}
 
-	void EventBus::RemoveEvent(Event* e)
+	void EventBus::RemoveEvent(std::shared_ptr<Event> e)
 	{
-		auto iterator = std::find(m_Events.begin(), m_Events.end(), e);
+		for (auto eventIter = m_Events.begin(); eventIter != m_Events.end();)
+		{
+			std::shared_ptr<Event> eventInQ = *eventIter;
+			if (eventInQ == nullptr || e->GetName() != eventInQ->GetName())
+				continue;
 
-		if (iterator != m_Events.end())
-			m_Events.erase(iterator);
+			eventIter = m_Events.erase(eventIter);
+		}
 	}
 
-	void EventBus::HandleEvents()
+	void EventBus::Process()
 	{
-		for (Event* e : m_Events)
-		{
-			if (e->IsHandled()) RemoveEvent(e);
-		}
+		for (std::shared_ptr<Event> e : m_Events)
+			if (e != nullptr && e->IsHandled())
+				RemoveEvent(e);
 	}
 }

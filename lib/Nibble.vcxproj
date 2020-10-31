@@ -119,6 +119,7 @@
     <ClInclude Include="src\Core\MacroPlatform.h" />
     <ClInclude Include="src\Core\MacroCore.h" />
     <ClInclude Include="src\Nibble.h" />
+    <ClInclude Include="src\Event\Window\WindowsCloseEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core\Application.cpp" />
@@ -132,6 +133,7 @@
     </ClCompile>
     <ClCompile Include="src\Render\Window\Platform\Win\WinWindow.cpp" />
     <ClCompile Include="src\Traceability\Logger.cpp" />
+    <ClCompile Include="src\Event\Window\WindowsCloseEvent.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

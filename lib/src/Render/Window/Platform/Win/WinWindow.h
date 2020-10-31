@@ -17,7 +17,6 @@ namespace Nibble {
 		GLFWwindow* m_window;
 
 		bool m_isPossibleCloseWindow = true;
-		bool m_isClosed = false;
 
 		virtual void Init(const WindowConfiguration& props);
 
@@ -30,7 +29,7 @@ namespace Nibble {
 			GLFWwindow* win
 		) -> void;
 	public:
-		WinWindow();
+		WinWindow() {};
 		WinWindow(const WindowConfiguration& cfg);
 
 		virtual IWindow* Create(const WindowConfiguration& props = WindowConfiguration()) override;
@@ -49,6 +48,5 @@ namespace Nibble {
 
 		void SetVSync(bool enabled) override;
 		bool IsVSync() const override;
-		bool IsShootdown() const override;
 	};
 }

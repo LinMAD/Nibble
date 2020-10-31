@@ -7,7 +7,7 @@ namespace Nibble {
 	class NIBBLE_API EventBus {
 	private:
 		static EventBus s_Instance;
-		std::vector<Event*> m_Events;
+		std::vector<std::shared_ptr<Event>> m_Events;
 
 		EventBus() {};
 	public:
@@ -18,9 +18,10 @@ namespace Nibble {
 			return s_Instance;
 		}
 
-		void RegisterEvent(Event* e);
-		void RemoveEvent(Event* e);
-		void HandleEvents();
+		std::shared_ptr<Event> DispatchEvent(Event::EventType type);
+		void RegisterEvent(std::shared_ptr<Event> e);
+		void RemoveEvent(std::shared_ptr<Event> e);
+		void Process();
 	};
 }
 
