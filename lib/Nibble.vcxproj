@@ -109,8 +109,8 @@
   <ItemGroup>
     <ClInclude Include="src\Event\Event.h" />
     <ClInclude Include="src\Event\EventBus.h" />
-    <ClInclude Include="src\Core\Application.h" />
-    <ClInclude Include="src\Core\ApplicationMainEntry.h" />
+    <ClInclude Include="src\Core\Engine.h" />
+    <ClInclude Include="src\Core\EngineMainEntry.h" />
     <ClInclude Include="src\Event\Window\WindowResizeEvent.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\Render\Window\IWindow.h" />
@@ -122,7 +122,7 @@
     <ClInclude Include="src\Event\Window\WindowsCloseEvent.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Core\Application.cpp" />
+    <ClCompile Include="src\Core\Engine.cpp" />
     <ClCompile Include="src\Event\EventBus.cpp" />
     <ClCompile Include="src\Event\Window\WindowResizeEvent.cpp" />
     <ClCompile Include="src\pch.cpp">

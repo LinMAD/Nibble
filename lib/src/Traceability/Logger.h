@@ -32,8 +32,8 @@ namespace Nibble {
 #define LOGGER_CORE_DEBUG(...)::Nibble::Logger::GetCoreLogger()->debug(__VA_ARGS__);
 #define LOGGER_CORE_TRACE(...)::Nibble::Logger::GetCoreLogger()->trace(__VA_ARGS__);
 
-#define LOGGER_APP_ERROR(...)::Nibble::Logger::GetClientLogger()->error(__VA_ARGS__);
-#define LOGGER_APP_WARNING(...)::Nibble::Logger::GetClientLogger()->warn(__VA_ARGS__);
-#define LOGGER_APP_INFO(...)::Nibble::Logger::GetClientLogger()->info(__VA_ARGS__);
-#define LOGGER_APP_DEBUG(...)::Nibble::Logger::GetClientLogger()->debug(__VA_ARGS__);
-#define LOGGER_APP_TRACE(...)::Nibble::Logger::GetClientLogger()->trace(__VA_ARGS__);
+#define LOGGER_ENG_ERROR(...)::Nibble::Logger::GetClientLogger()->error(__VA_ARGS__);
+#define LOGGER_ENG_WARNING(...)::Nibble::Logger::GetClientLogger()->warn(__VA_ARGS__);
+#define LOGGER_ENG_INFO(...)::Nibble::Logger::GetClientLogger()->info(__VA_ARGS__);
+#define LOGGER_ENG_DEBUG(...)::Nibble::Logger::GetClientLogger()->debug(__VA_ARGS__);
+#define LOGGER_ENG_TRACE(...)::Nibble::Logger::GetClientLogger()->trace(__VA_ARGS__);

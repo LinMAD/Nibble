@@ -1,6 +1,6 @@
 #include "Nibble.h"
 
-class Playground : public Nibble::Application
+class Playground : public Nibble::Engine
 {
 public:
 	Playground()
@@ -11,7 +11,7 @@ public:
 	}
 };
 
-Nibble::Application* Nibble::CreateApplicaiton()
+Nibble::Engine* Nibble::InitilizeEngine()
 {
 	return new Playground();
 }

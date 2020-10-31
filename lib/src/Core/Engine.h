@@ -4,18 +4,18 @@
 #include "Render/Window/Platform/Win/WinWindow.h"
 
 namespace Nibble {
-	class NIBBLE_API Application
+	class NIBBLE_API Engine
 	{
 	private:
 		std::unique_ptr<IWindow> m_window;
 
 		bool m_running = true;
 	public:
-		Application();
-		virtual ~Application();
+		Engine();
+		virtual ~Engine();
 
 		void Run();
 	};
 
-	Application* CreateApplicaiton();
+	Engine* InitilizeEngine();
 }

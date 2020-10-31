@@ -48,7 +48,8 @@ Because it's fair enough, during researches and implementation I looking for man
 Research and refactor old codebase to have a nice structure like that list:
 - ~~Entry point~~
 - ~~Logger~~
-- ~~Event bus system for user I/O~~
+- ~~Base Event bus system for user I/O~~
+	- Event subscribers
 - Files (I/O), VFS (Virutal file system) support
 - Graphic related layers
 	- Applicaiton layer
@@ -57,3 +58,5 @@ Research and refactor old codebase to have a nice structure like that list:
 	- Graphic renderer layer
 		- API Abstraction for (OpenGL, Vulcan or DirectX)
 		- Shaders compilation
+
+![engine_design_v0](Design.png)

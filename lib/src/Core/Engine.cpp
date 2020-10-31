@@ -1,23 +1,23 @@
 #include <GLFW/glfw3.h>
 
 #include "pch.h"
-#include "Core/Application.h"
+#include "Core/Engine.h"
 #include "Traceability/Logger.h"
 #include "Event/Window/WindowResizeEvent.h"
 
-Nibble::Application::Application()
+Nibble::Engine::Engine()
 {
 	WinWindow window;
 	m_window = std::unique_ptr<IWindow>(window.Create());
 }
 
-Nibble::Application::~Application()
+Nibble::Engine::~Engine()
 {
 }
 
-void Nibble::Application::Run()
+void Nibble::Engine::Run()
 {
-	LOGGER_APP_INFO("Initializing");
+	LOGGER_ENG_INFO("Initializing");
 
 	// Main loop
 	while (m_running)

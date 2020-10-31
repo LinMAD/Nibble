@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Core/Application.h"
+#include "Core/Engine.h"
 
 #include "Traceability/Logger.h"
 
 // Entry point for other applications
-#include "Core/ApplicationMainEntry.h"
+#include "Core/EngineMainEntry.h"
 // End of entry point
