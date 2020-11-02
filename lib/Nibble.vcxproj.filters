@@ -27,9 +27,6 @@
     <None Include="..\README.md">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="packages.config">
-      <Filter>Resource Files</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Nibble.h">

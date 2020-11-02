@@ -23,8 +23,8 @@ BTW, I have Instagram related to this hobby *[nibble_hex](https://www.instagram.
 
 ### Development work environment info
 * Window 10 x64
-* NuGet for package management
 * Microsoft Visual Studio Community 2019 (Solution contains linking, build events, and rest configuration)
+* To build include engine and dependencies sources like in (lib\src;lib\vendor\spdlog\include;)
 
 ## License
 Project under MIT, so I don't mind if someone will use this code for any purpose. 
@@ -60,3 +60,7 @@ Research and refactor old codebase to have a nice structure like that list:
 		- Shaders compilation
 
 ![engine_design_v0](Design.png)
+
+##### Singletons
+- `Logger` can be accessed like `LOGGER_CORE_ERROR("msg")`
+- `EventBus` just to add event use `EVENT_BUS_ADD_EVENT(Event)`

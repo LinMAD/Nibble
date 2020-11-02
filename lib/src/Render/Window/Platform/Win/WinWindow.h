@@ -13,10 +13,10 @@ namespace Nibble {
 			bool VSync;
 		};
 
-		WindowData m_data;
-		GLFWwindow* m_window;
+		WindowData m_Data;
+		GLFWwindow* m_Window;
 
-		bool m_isPossibleCloseWindow = true;
+		bool m_IsPossibleCloseWindow = true;
 
 		virtual void Init(const WindowConfiguration& props);
 
@@ -31,6 +31,7 @@ namespace Nibble {
 	public:
 		WinWindow() {};
 		WinWindow(const WindowConfiguration& cfg);
+		~WinWindow();
 
 		virtual IWindow* Create(const WindowConfiguration& props = WindowConfiguration()) override;
 
@@ -38,12 +39,12 @@ namespace Nibble {
 
 		inline unsigned int GetWidth() const override
 		{
-			return m_data.Width;
+			return m_Data.Width;
 		}
 
 		inline unsigned int GetHeight() const override
 		{
-			return m_data.Height;
+			return m_Data.Height;
 		}
 
 		void SetVSync(bool enabled) override;

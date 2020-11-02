@@ -16,11 +16,12 @@ namespace Nibble {
 
 		enum EventCategory
 		{
-			Window = 1 << 0,
-			Input = 1 << 1,
-			Keyboard = 1 << 2,
-			Mouse = 1 << 3,
-			MouseButton = 1 << 4,
+			Engine = 1 << 0,
+			Window = 1 << 1,
+			Input = 1 << 2,
+			Keyboard = 1 << 3,
+			Mouse = 1 << 4,
+			MouseButton = 1 << 5,
 		};
 
 		virtual void SetIsHandled() = 0;

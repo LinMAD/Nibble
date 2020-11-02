@@ -8,9 +8,9 @@ namespace Nibble {
 
 	void WinWindow::Init(const WindowConfiguration& cfg)
 	{
-		m_data.Title = cfg.Title;
-		m_data.Width = cfg.Width;
-		m_data.Height = cfg.Height;
+		m_Data.Title = cfg.Title;
+		m_Data.Width = cfg.Width;
+		m_Data.Height = cfg.Height;
 
 		LOGGER_CORE_INFO("Atempt to create window {0} ({1}, {2})", cfg.Title, cfg.Width, cfg.Height);
 
@@ -22,20 +22,20 @@ namespace Nibble {
 			s_GLFWInitialized = true;
 		}
 
-		m_window = glfwCreateWindow(
+		m_Window = glfwCreateWindow(
 			(int)cfg.Width,
 			(int)cfg.Height,
-			m_data.Title.c_str(),
+			m_Data.Title.c_str(),
 			nullptr,
 			nullptr
 		);
 
-		glfwMakeContextCurrent(m_window);
-		glfwSetWindowUserPointer(m_window, &m_data);
+		glfwMakeContextCurrent(m_Window);
+		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 
-		glfwSetWindowSizeCallback(m_window, WindowResizeCallback);
-		glfwSetWindowCloseCallback(m_window, WindowCloseCallback);
+		glfwSetWindowSizeCallback(m_Window, WindowResizeCallback);
+		glfwSetWindowCloseCallback(m_Window, WindowCloseCallback);
 	}
 
 	inline auto WinWindow::WindowResizeCallback(GLFWwindow* win, int w, int h) -> void
@@ -55,9 +55,9 @@ namespace Nibble {
 	{
 		WinWindow& winWindow = *(WinWindow*)glfwGetWindowUserPointer(win);
 
-		if (!winWindow.m_isPossibleCloseWindow) return;
+		if (!winWindow.m_IsPossibleCloseWindow) return;
 
-		glfwDestroyWindow(win);
+		glfwSetWindowShouldClose(win, GLFW_TRUE);
 
 		EVENT_BUS_ADD_EVENT(std::make_shared<WindowsCloseEvent>());
 	}
@@ -67,6 +67,11 @@ namespace Nibble {
 		Init(cfg);
 	}
 
+	WinWindow::~WinWindow()
+	{
+		glfwDestroyWindow(m_Window);
+	}
+
 	IWindow* WinWindow::Create(const WindowConfiguration& cfg)
 	{
 		return new WinWindow(cfg);
@@ -74,12 +79,12 @@ namespace Nibble {
 
 	void WinWindow::OnUpdate()
 	{
+		if (glfwWindowShouldClose(m_Window)) return;
+
 		glfwPollEvents();
-		glfwSwapBuffers(m_window);
+		glfwSwapBuffers(m_Window);
 
-		if (!glfwWindowShouldClose(m_window)) return;
-
-		m_isPossibleCloseWindow = false;
+		m_IsPossibleCloseWindow = false;
 
 		std::shared_ptr<Event> winClose = Nibble::EventBus::GetInstance().DispatchEvent(Event::EventType::WindowClose);
 		if (winClose != nullptr)
@@ -91,11 +96,11 @@ namespace Nibble {
 		if (enabled) glfwSwapInterval(1);
 		else glfwSwapInterval(0);
 
-		m_data.VSync = enabled;
+		m_Data.VSync = enabled;
 	}
 
 	bool WinWindow::IsVSync() const
 	{
-		return m_data.VSync;
+		return m_Data.VSync;
 	}
 }
