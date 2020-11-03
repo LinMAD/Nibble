@@ -3,10 +3,7 @@
 
 void Nibble::WindowsCloseEvent::SetIsHandled()
 {
-	std::stringstream ss;
-	ss << GetName() << ": Gracefully closing...";
-
-	LOGGER_CORE_TRACE(ss.str());
+	M_LOGGER_ENG_DEBUG(ToString());
 
 	m_IsHandled = true;
 }
@@ -26,3 +23,10 @@ Nibble::Event::EventType Nibble::WindowsCloseEvent::GetEventType()
 	return m_eventType;
 }
 
+std::string Nibble::WindowsCloseEvent::ToString()
+{
+	std::stringstream ss;
+	ss << GetName() << ": Gracefully closing...";
+
+	return ss.str();
+}

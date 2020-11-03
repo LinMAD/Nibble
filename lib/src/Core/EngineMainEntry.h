@@ -8,7 +8,7 @@ extern Nibble::Engine* Nibble::InitilizeEngine();
 int main(int argc, char** argv)
 {
 	Nibble::Logger::Init();
-	LOGGER_CORE_DEBUG("Logger initialized...");
+	M_LOGGER_ENG_DEBUG("Logger initialized...");
 
 	auto app = Nibble::InitilizeEngine();
 

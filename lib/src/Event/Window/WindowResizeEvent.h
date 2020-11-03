@@ -25,6 +25,7 @@ namespace Nibble {
 		virtual const char* GetName() override;
 		virtual int GetCategoryFlags() override;
 		virtual EventType GetEventType() override;
+		virtual std::string ToString() override;
 	protected:
 		const char* m_name = "WindowResizeEvent";
 		int m_categoryFlags = EventCategory::Window;

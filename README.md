@@ -38,9 +38,7 @@ Because it's fair enough, during researches and implementation I looking for man
 - Memory system layer (Like I saw in the Snowdrop from Massive entertainment)
 - Entity components system layer?
 - Physics system layer?
-- Build system, do I need it?
 - Scene managment (Better with UI but for now component will work)?
-- What about automated code linters?
 - How to write an automated tests for graphics?
 - What else?
 
@@ -49,17 +47,14 @@ Research and refactor old codebase to have a nice structure like that list:
 - ~~Entry point~~
 - ~~Logger~~
 - ~~Base Event bus system for user I/O~~
-	- Event subscribers
+	- ~~Event listeners~~
+	- ~~Client layer stack: Client app can create layers to work with I\O and Events~~
 - Files (I/O), VFS (Virutal file system) support
 - Graphic related layers
-	- Applicaiton layer
-		- User input
-		- Events
 	- Graphic renderer layer
 		- API Abstraction for (OpenGL, Vulcan or DirectX)
 		- Shaders compilation
-
-![engine_design_v0](Design.png)
+- ???
 
 ##### Singletons
 - `Logger` can be accessed like `LOGGER_CORE_ERROR("msg")`

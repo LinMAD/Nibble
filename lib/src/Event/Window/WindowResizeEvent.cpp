@@ -3,10 +3,7 @@
 
 void Nibble::WindowResizeEvent::SetIsHandled()
 {
-	std::stringstream ss;
-	ss << GetName() << ": " << m_Width << ", " << m_Height;
-
-	LOGGER_CORE_TRACE(ss.str());
+	M_LOGGER_ENG_DEBUG(ToString());
 
 	m_IsHandled = true;
 }
@@ -24,5 +21,13 @@ int Nibble::WindowResizeEvent::GetCategoryFlags()
 Nibble::Event::EventType Nibble::WindowResizeEvent::GetEventType()
 {
 	return m_eventType;
+}
+
+std::string Nibble::WindowResizeEvent::ToString()
+{
+	std::stringstream ss;
+	ss << GetName() << ": " << m_Width << ", " << m_Height;
+
+	return ss.str();
 }
 

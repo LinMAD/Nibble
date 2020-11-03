@@ -2,6 +2,7 @@
 
 #include "pch.h"
 #include "Event/Event.h"
+#include "Layer/LayerStack.h"
 
 namespace Nibble {
 	class NIBBLE_API EventBus {
@@ -21,7 +22,7 @@ namespace Nibble {
 		std::shared_ptr<Event> DispatchEvent(Event::EventType type);
 		void RegisterEvent(std::shared_ptr<Event> e);
 		void RemoveEvent(std::shared_ptr<Event> e);
-		void Process();
+		void Process(LayerStack ls);
 	};
 }
 

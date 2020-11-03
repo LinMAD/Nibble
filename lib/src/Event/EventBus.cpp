@@ -43,10 +43,21 @@ namespace Nibble {
 		}
 	}
 
-	void EventBus::Process()
+	void EventBus::Process(LayerStack ls)
 	{
+		if (m_Events.size() == 0) return;
+
 		for (std::shared_ptr<Event> e : m_Events)
-			if (e != nullptr && e->IsHandled())
-				RemoveEvent(e);
+		{
+			if (e == nullptr) continue;
+
+			for (auto it = ls.end(); it != ls.begin(); )
+			{
+				(*--it)->OnEvent(*e);
+				if (e->IsHandled()) break;
+			}
+
+			if (e->IsHandled()) RemoveEvent(e);
+		}
 	}
 }

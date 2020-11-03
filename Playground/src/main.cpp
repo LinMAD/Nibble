@@ -1,17 +1,22 @@
 #include "Nibble.h"
+#include "TestLayer.h"
 
-class Playground : public Nibble::Engine
-{
-public:
-	Playground()
+namespace Playground {
+	class ClientApplication : public Nibble::Engine
 	{
-	}
-	~Playground()
-	{
-	}
-};
+	public:
+		ClientApplication()
+		{
+			PushLayer(std::make_shared<TestLayer>());
+		}
+		~ClientApplication()
+		{
+		}
+	};
+}
 
+// Executing main entry
 Nibble::Engine* Nibble::InitilizeEngine()
 {
-	return new Playground();
+	return new Playground::ClientApplication();
 }

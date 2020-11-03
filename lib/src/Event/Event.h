@@ -34,6 +34,8 @@ namespace Nibble {
 		virtual int GetCategoryFlags() = 0;
 		virtual EventType GetEventType() = 0;
 
+		virtual std::string ToString() = 0;
+
 		inline bool IsInCategory(EventCategory category)
 		{
 			return GetCategoryFlags() & category;

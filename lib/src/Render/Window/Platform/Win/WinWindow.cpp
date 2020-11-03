@@ -12,7 +12,7 @@ namespace Nibble {
 		m_Data.Width = cfg.Width;
 		m_Data.Height = cfg.Height;
 
-		LOGGER_CORE_INFO("Atempt to create window {0} ({1}, {2})", cfg.Title, cfg.Width, cfg.Height);
+		M_LOGGER_ENG_DEBUG("Atempt to create window {0} ({1}, {2})", cfg.Title, cfg.Width, cfg.Height);
 
 		if (!s_GLFWInitialized)
 		{
