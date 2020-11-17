@@ -57,9 +57,9 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NIBBLE_PLATFORM_WINDOWS;NIBBLE_BUILD_DLL;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NIBBLE_PLATFORM_WINDOWS;NIBBLE_BUILD_DLL;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)lib\src;$(SolutionDir)lib\vendor\glfw\include;$(SolutionDir)lib\vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)lib\src;$(SolutionDir)lib\vendor\glfw\include;$(SolutionDir)lib\vendor\spdlog\include;$(SolutionDir)lib\vendor\glad\include;$(SolutionDir)lib\vendor\imgui;$(SolutionDir)lib\vendor\glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -68,11 +68,12 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)lib\vendor\glfw\lib-vc2019;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\vendor\glfw\lib-vc2019;$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y "$(OutDir)Nibble.dll" "$(SolutionDir)bin\$(Configuration)-$(Platform)\Playground\"
-</Command>
+      <Command>xcopy "$(SolutionDir)lib\vendor\glfw\lib-vc2019\glfw3.lib" "$(OutDir)" /Y</Command>
+      <Message>
+      </Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -81,9 +82,9 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NIBBLE_PLATFORM_WINDOWS;NIBBLE_BUILD_DLL;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NIBBLE_PLATFORM_WINDOWS;NIBBLE_BUILD_DLL;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)lib\src;$(SolutionDir)lib\vendor\glfw\include;$(SolutionDir)lib\vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)lib\src;$(SolutionDir)lib\vendor\glfw\include;$(SolutionDir)lib\vendor\spdlog\include;$(SolutionDir)lib\vendor\glad\include;$(SolutionDir)lib\vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -97,8 +98,9 @@
       <AdditionalLibraryDirectories>$(SolutionDir)lib\vendor\glfw\lib-vc2019;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y "$(OutDir)Nibble.dll" "$(SolutionDir)bin\$(Configuration)-$(Platform)\Playground\"
-</Command>
+      <Command>xcopy "$(SolutionDir)lib\vendor\glfw\lib-vc2019\glfw3.lib" "$(OutDir)" /Y</Command>
+      <Message>
+      </Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -109,13 +111,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Layer\LayerStack.h" />
-    <ClInclude Include="src\Layer\Layer.h" />
+    <ClInclude Include="src\Layer\ILayer.h" />
     <ClInclude Include="src\Event\Event.h" />
     <ClInclude Include="src\Event\EventBus.h" />
     <ClInclude Include="src\Core\Engine.h" />
     <ClInclude Include="src\Core\EngineMainEntry.h" />
     <ClInclude Include="src\Event\Window\WindowResizeEvent.h" />
     <ClInclude Include="src\pch.h" />
+    <ClInclude Include="src\Render\Gui\GuiLayer.h" />
+    <ClInclude Include="src\Render\OpenGL\ImGuiImplOpenGLRenderer.h" />
     <ClInclude Include="src\Render\Window\IWindow.h" />
     <ClInclude Include="src\Render\Window\Platform\Win\WinWindow.h" />
     <ClInclude Include="src\Traceability\Logger.h" />
@@ -123,10 +127,16 @@
     <ClInclude Include="src\Core\MacroCore.h" />
     <ClInclude Include="src\Nibble.h" />
     <ClInclude Include="src\Event\Window\WindowsCloseEvent.h" />
+    <ClInclude Include="vendor\imgui\imconfig.h" />
+    <ClInclude Include="vendor\imgui\imgui.h" />
+    <ClInclude Include="vendor\imgui\imgui_internal.h" />
+    <ClInclude Include="vendor\imgui\imstb_rectpack.h" />
+    <ClInclude Include="vendor\imgui\imstb_textedit.h" />
+    <ClInclude Include="vendor\imgui\imstb_truetype.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Layer\LayerStack.cpp" />
-    <ClCompile Include="src\Layer\Layer.cpp" />
+    <ClCompile Include="src\Layer\ILayer.cpp" />
     <ClCompile Include="src\Core\Engine.cpp" />
     <ClCompile Include="src\Event\EventBus.cpp" />
     <ClCompile Include="src\Event\Window\WindowResizeEvent.cpp" />
@@ -136,9 +146,24 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">pch.h</PrecompiledHeaderFile>
     </ClCompile>
+    <ClCompile Include="src\Render\Gui\GuiLayer.cpp" />
+    <ClCompile Include="src\Render\OpenGL\ImGuiImplOpenGLRenderer.cpp" />
     <ClCompile Include="src\Render\Window\Platform\Win\WinWindow.cpp" />
     <ClCompile Include="src\Traceability\Logger.cpp" />
     <ClCompile Include="src\Event\Window\WindowsCloseEvent.cpp" />
+    <ClCompile Include="vendor\glad\src\glad.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsCpp</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">CompileAsCpp</CompileAs>
+    </ClCompile>
+    <ClCompile Include="vendor\imgui\imgui.cpp" />
+    <ClCompile Include="vendor\imgui\imgui_demo.cpp" />
+    <ClCompile Include="vendor\imgui\imgui_draw.cpp" />
+    <ClCompile Include="vendor\imgui\imgui_widgets.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="vendor\glad\glad.vcxproj">
+      <Project>{cd2ac379-71c7-4e6c-996a-11d0d2c55d83}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

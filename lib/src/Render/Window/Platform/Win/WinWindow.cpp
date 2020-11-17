@@ -1,10 +1,18 @@
 #include "pch.h"
-#include "Render/Window/Platform/Win/WinWindow.h"
+#include "WinWindow.h"
 #include "Event/Window/WindowResizeEvent.h"
 #include "Event/Window/WindowsCloseEvent.h"
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 
 namespace Nibble {
-	static bool s_GLFWInitialized = false;
+	static bool s_GlfwInitialized = false;
+	static bool s_GladInitialized = false;
+
+	static void GlfwErrorCallback(int error, const char* description)
+	{
+		M_LOGGER_ENG_ERROR("GLFW Error ({0}): {1}", error, description);
+	}
 
 	void WinWindow::Init(const WindowConfiguration& cfg)
 	{
@@ -14,14 +22,21 @@ namespace Nibble {
 
 		M_LOGGER_ENG_DEBUG("Atempt to create window {0} ({1}, {2})", cfg.Title, cfg.Width, cfg.Height);
 
-		if (!s_GLFWInitialized)
+		if (!s_GlfwInitialized)
 		{
 			int success = glfwInit();
+
 			NIBBLE_CORE_ASSERT(success, "GLFW intialize failed!");
 
-			s_GLFWInitialized = true;
-		}
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+			glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
+			glfwSetErrorCallback(GlfwErrorCallback);
+
+			s_GlfwInitialized = true;
+		}
+		
 		m_Window = glfwCreateWindow(
 			(int)cfg.Width,
 			(int)cfg.Height,
@@ -36,6 +51,14 @@ namespace Nibble {
 
 		glfwSetWindowSizeCallback(m_Window, WindowResizeCallback);
 		glfwSetWindowCloseCallback(m_Window, WindowCloseCallback);
+
+		if (!s_GladInitialized)
+		{
+			int success = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+			NIBBLE_CORE_ASSERT(success, "Failed to initialize GLAD");
+
+			s_GladInitialized = true;
+		}
 	}
 
 	inline auto WinWindow::WindowResizeCallback(GLFWwindow* win, int w, int h) -> void
@@ -43,10 +66,9 @@ namespace Nibble {
 		auto e = std::make_shared<WindowResizeEvent>(w, h);
 		EVENT_BUS_ADD_EVENT(e);
 
-		glViewport(0, 0, (GLsizei)w, (GLsizei)h);
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		glMatrixMode(GL_MODELVIEW);
+		WindowData& data = *(WindowData*)glfwGetWindowUserPointer(win);
+		data.Width = w;
+		data.Height = h;
 
 		e->SetIsHandled();
 	}

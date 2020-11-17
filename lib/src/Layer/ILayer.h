@@ -4,12 +4,14 @@
 #include "Event/Event.h"
 
 namespace Nibble {
-	class NIBBLE_API Layer
+	class NIBBLE_API ILayer
 	{
 	public:
-		Layer(const std::string& layerName = "Abstract render layer");
-		virtual ~Layer();
+		ILayer(const std::string& layerName = "Abstract render layer");
+		virtual ~ILayer();
 
+		virtual void OnAttach() {}
+		virtual void OnDetach() {}
 		virtual void OnUpdate() {}
 		virtual void OnEvent(Event& e) {}
 

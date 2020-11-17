@@ -3,10 +3,10 @@
 #include "Nibble.h"
 
 namespace Playground {
-	class TestLayer : public Nibble::Layer
+	class TestLayer : public Nibble::ILayer
 	{
 	public:
-		TestLayer() : Layer("Test Layer") {}
+		TestLayer() : ILayer("Test Layer") {}
 
 		void OnUpdate() override
 		{

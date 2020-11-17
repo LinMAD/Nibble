@@ -53,7 +53,10 @@ namespace Nibble {
 
 			for (auto it = ls.end(); it != ls.begin(); )
 			{
-				(*--it)->OnEvent(*e);
+				auto &layer = (*--it);
+				if (layer == nullptr) continue;
+
+				layer->OnEvent(*e);
 				if (e->IsHandled()) break;
 			}
 

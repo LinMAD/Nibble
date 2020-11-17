@@ -14,7 +14,7 @@ namespace Nibble {
 	public:
 		EventBus(const EventBus&) = delete;
 
-		static EventBus& GetInstance()
+		inline static EventBus& GetInstance()
 		{
 			return s_Instance;
 		}

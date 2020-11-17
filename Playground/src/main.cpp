@@ -9,14 +9,13 @@ namespace Playground {
 		{
 			PushLayer(std::make_shared<TestLayer>());
 		}
-		~ClientApplication()
-		{
-		}
+		~ClientApplication() {}
 	};
 }
+
 
 // Executing main entry
 Nibble::Engine* Nibble::InitilizeEngine()
 {
-	return new Playground::ClientApplication();
+	 return new Playground::ClientApplication();
 }
