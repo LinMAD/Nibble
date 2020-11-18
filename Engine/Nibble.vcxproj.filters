@@ -95,7 +95,13 @@
     <ClInclude Include="extern\imgui\imstb_truetype.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Graphics\Gui\GuiLayer.h">
+    <ClInclude Include="src\Graphic\Gui\GuiLayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Event\Mouse\MouseButtonPressedEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Event\Mouse\MouseButtonEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -121,9 +127,6 @@
     <ClCompile Include="src\Layer\LayerStack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Layer\ILayer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Platform\Win\WinWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -145,7 +148,10 @@
     <ClCompile Include="extern\imgui\imgui_widgets.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Graphics\Gui\GuiLayer.cpp">
+    <ClCompile Include="src\Graphic\Gui\GuiLayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Event\Mouse\MouseButtonPressedEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

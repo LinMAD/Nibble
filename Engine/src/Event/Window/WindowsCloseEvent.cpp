@@ -10,17 +10,17 @@ void Nibble::WindowsCloseEvent::SetIsHandled()
 
 const char* Nibble::WindowsCloseEvent::GetName()
 {
-	return m_name;
+	return m_Name;
 }
 
 int Nibble::WindowsCloseEvent::GetCategoryFlags()
 {
-	return m_categoryFlags;
+	return m_CategoryFlags;
 }
 
 Nibble::Event::EventType Nibble::WindowsCloseEvent::GetEventType()
 {
-	return m_eventType;
+	return m_EventType;
 }
 
 std::string Nibble::WindowsCloseEvent::ToString()

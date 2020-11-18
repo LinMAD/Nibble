@@ -57,7 +57,6 @@ namespace Nibble {
 				if (layer == nullptr) continue;
 
 				layer->OnEvent(*e);
-				if (e->IsHandled()) break;
 			}
 
 			if (e->IsHandled()) RemoveEvent(e);

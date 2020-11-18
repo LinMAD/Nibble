@@ -21,9 +21,11 @@ namespace Nibble {
 		ImGui::StyleColorsLight();
 
 		ImGuiIO& io = ImGui::GetIO();
+
 		// Mouse
 		io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
 		io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;
+
 		// TODO Keyboard
 
 		ImGui_ImplOpenGL3_Init("#version 410");
@@ -55,5 +57,31 @@ namespace Nibble {
 
 	void GuiLayer::OnEvent(Event& e)
 	{
+		// TODO Improve this slow section
+
+		if (dynamic_cast<WindowResizeEvent*>(&e) != nullptr)
+			OnWindowResizeEvent(dynamic_cast<WindowResizeEvent&>(e));
+
+		if (dynamic_cast<MouseButtonPressedEvent*>(&e) != nullptr)
+		{
+			OnMouseButtonPressedEvent(dynamic_cast<MouseButtonPressedEvent&>(e));
+			e.SetIsHandled();
+		}
+	}
+
+	void GuiLayer::OnWindowResizeEvent(WindowResizeEvent& e)
+	{
+		ImGuiIO& io = ImGui::GetIO();
+
+		io.DisplaySize = ImVec2(e.GetWidth(), e.GetHeight());
+		io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
+
+		glViewport(0, 0, e.GetWidth(), e.GetHeight());
+	}
+
+	void GuiLayer::OnMouseButtonPressedEvent(MouseButtonPressedEvent& e)
+	{
+		ImGuiIO& io = ImGui::GetIO();
+		io.MouseDown[e.GetMouseButton()] = true;
 	}
 }

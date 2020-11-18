@@ -7,8 +7,8 @@ namespace Nibble {
 	class NIBBLE_API ILayer
 	{
 	public:
-		ILayer(const std::string& layerName = "Abstract render layer");
-		virtual ~ILayer();
+		ILayer(const std::string& layerName = "Abstract render layer") : m_DebugName(layerName) {};
+		virtual ~ILayer() {};
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}

@@ -2,6 +2,7 @@
 #include "WinWindow.h"
 #include "Event/Window/WindowResizeEvent.h"
 #include "Event/Window/WindowsCloseEvent.h"
+#include "Event/Mouse/MouseButtonPressedEvent.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -59,6 +60,20 @@ namespace Nibble {
 
 			s_GladInitialized = true;
 		}
+
+		// TODO Keyboard, Character events
+		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods)
+			{
+				if (action == GLFW_PRESS)
+				{
+					EVENT_BUS_ADD_EVENT(std::make_shared<MouseButtonPressedEvent>(button));
+				}
+				else if (action == GLFW_RELEASE)
+				{
+					M_LOGGER_ENG_INFO("Mouse release evente ->>>>");
+				}
+			}
+		);
 	}
 
 	inline auto WinWindow::WindowResizeCallback(GLFWwindow* win, int w, int h) -> void

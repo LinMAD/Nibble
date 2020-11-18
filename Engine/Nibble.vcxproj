@@ -25,7 +25,7 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -52,6 +52,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <GlfwPlatformToolset>v142</GlfwPlatformToolset>
+    <OutDir>$(SolutionDir)bin\$(Configuration)-$(Platform)\$(ProjectName)\</OutDir>
+    <IntDir>$(SolutionDir)int\$(Configuration)-$(Platform)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -110,6 +112,8 @@
     <None Include="..\README.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Event\Mouse\MouseButtonEvent.h" />
+    <ClInclude Include="src\Event\Mouse\MouseButtonPressedEvent.h" />
     <ClInclude Include="src\Layer\LayerStack.h" />
     <ClInclude Include="src\Layer\ILayer.h" />
     <ClInclude Include="src\Event\Event.h" />
@@ -118,7 +122,7 @@
     <ClInclude Include="src\Core\EngineMainEntry.h" />
     <ClInclude Include="src\Event\Window\WindowResizeEvent.h" />
     <ClInclude Include="src\pch.h" />
-    <ClInclude Include="src\Graphics\Gui\GuiLayer.h" />
+    <ClInclude Include="src\Graphic\Gui\GuiLayer.h" />
     <ClInclude Include="src\Platform\OpenGL\ImGuiImplOpenGLRenderer.h" />
     <ClInclude Include="src\Platform\IWindow.h" />
     <ClInclude Include="src\Platform\Win\WinWindow.h" />
@@ -135,8 +139,8 @@
     <ClInclude Include="extern\imgui\imstb_truetype.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Event\Mouse\MouseButtonPressedEvent.cpp" />
     <ClCompile Include="src\Layer\LayerStack.cpp" />
-    <ClCompile Include="src\Layer\ILayer.cpp" />
     <ClCompile Include="src\Core\Engine.cpp" />
     <ClCompile Include="src\Event\EventBus.cpp" />
     <ClCompile Include="src\Event\Window\WindowResizeEvent.cpp" />
@@ -146,7 +150,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">pch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\Graphics\Gui\GuiLayer.cpp" />
+    <ClCompile Include="src\Graphic\Gui\GuiLayer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\ImGuiImplOpenGLRenderer.cpp" />
     <ClCompile Include="src\Platform\Win\WinWindow.cpp" />
     <ClCompile Include="src\Traceability\Logger.cpp" />

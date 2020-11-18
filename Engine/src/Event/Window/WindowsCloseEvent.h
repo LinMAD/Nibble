@@ -1,6 +1,5 @@
 #pragma once
 
-#include "pch.h"
 #include "Event/Event.h"
 
 namespace Nibble {
@@ -13,8 +12,8 @@ namespace Nibble {
 		virtual EventType GetEventType() override;
 		virtual std::string ToString() override;
 	protected:
-		const char* m_name = "WindowsCloseEvent";
-		int m_categoryFlags = EventCategory::Window;
-		EventType m_eventType = EventType::WindowClose;
+		const char* m_Name = "WindowsCloseEvent";
+		int m_CategoryFlags = EventCategory::Window;
+		EventType m_EventType = EventType::WindowClose;
 	};
 }

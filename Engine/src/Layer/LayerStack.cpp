@@ -16,7 +16,7 @@ namespace Nibble {
 
 	void LayerStack::PushOverlay(std::shared_ptr<ILayer> ol)
 	{
-		m_Layers.emplace_back(ol);
+		m_Layers.insert(m_Layers.begin(), ol);
 		ol->OnAttach();
 	}
 

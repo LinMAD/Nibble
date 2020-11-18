@@ -3,7 +3,7 @@
 #include "Core/MacroCore.h"
 #include "Platform/IWindow.h"
 #include "Platform/Win/WinWindow.h"
-#include "Graphics/Gui/GuiLayer.h"
+#include "Graphic/Gui/GuiLayer.h"
 #include "Layer/LayerStack.h"
 
 namespace Nibble {
