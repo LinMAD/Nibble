@@ -59,7 +59,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)lib\src;$(SolutionDir)lib\vendor\glfw\include;$(SolutionDir)lib\vendor\glad\include;$(SolutionDir)lib\vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\src;$(SolutionDir)Engine\extern\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -69,7 +69,8 @@
     </Link>
     <PreBuildEvent>
       <Command>xcopy "$(SolutionDir)bin\$(Configuration)-$(Platform)\Nibble\Nibble.dll" "$(OutDir)" /Y
-xcopy "$(SolutionDir)bin\$(Configuration)-$(Platform)\Nibble\glfw3.lib" "$(OutDir)" /Y</Command>
+xcopy "$(SolutionDir)bin\$(Configuration)-$(Platform)\Nibble\glfw3.lib" "$(OutDir)" /Y
+      </Command>
       <Message>Copy dependencies</Message>
     </PreBuildEvent>
   </ItemDefinitionGroup>
@@ -81,7 +82,7 @@ xcopy "$(SolutionDir)bin\$(Configuration)-$(Platform)\Nibble\glfw3.lib" "$(OutDi
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)lib\src;$(SolutionDir)lib\vendor\glfw\include;$(SolutionDir)lib\vendor\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\src;$(SolutionDir)Engine\extern\spdlog\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -93,12 +94,13 @@ xcopy "$(SolutionDir)bin\$(Configuration)-$(Platform)\Nibble\glfw3.lib" "$(OutDi
     </Link>
     <PreBuildEvent>
       <Command>xcopy "$(SolutionDir)bin\$(Configuration)-$(Platform)\Nibble\Nibble.dll" "$(OutDir)" /Y
-xcopy "$(SolutionDir)bin\$(Configuration)-$(Platform)\Nibble\glfw3.lib" "$(OutDir)" /Y</Command>
+xcopy "$(SolutionDir)bin\$(Configuration)-$(Platform)\Nibble\glfw3.lib" "$(OutDir)" /Y
+      </Command>
       <Message>Copy dependencies</Message>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lib\Nibble.vcxproj">
+    <ProjectReference Include="..\Engine\Nibble.vcxproj">
       <Project>{0bb66091-29fb-4c82-8a33-1cd9ef4331e2}</Project>
     </ProjectReference>
   </ItemGroup>

@@ -1,5 +1,5 @@
 #pragma once
-#include "Render/Window/IWindow.h"
+#include "Platform/IWindow.h"
 struct GLFWwindow;
 
 namespace Nibble {

@@ -23,7 +23,6 @@ Implemented with C++, OpenGL and with other libraries GLEW, GLFW, GLM, Assimp.3.
 ### Development work environment info
 * Window 10 x64
 * Microsoft Visual Studio Community 2019 (Solution contains linking, build events, and rest configuration)
-* To build include engine and dependencies sources like in (lib\src;lib\vendor\spdlog\include;)
 
 ## License
 Project under MIT, so I don't mind if someone will use this code for any purpose. 
@@ -37,7 +36,6 @@ Because it's fair enough, during researches and implementation I looking for man
 - Memory system layer (Like I saw in the Snowdrop from Massive entertainment)
 - Entity components system layer?
 - Physics system layer?
-- Scene managment (Better with UI but for now component will work)?
 - How to write an automated tests for graphics?
 - What else?
 
@@ -50,7 +48,7 @@ Research and refactor old codebase to have a nice structure like that list:
 	- ~~Client layer stack: Client app can create layers to work with I\O and Events~~
 - Files (I/O), VFS (Virutal file system) support
 - Graphic related layers
-    - ~~GUI Overlay~~
+	- ~~GUI Overlay~~
 	- Graphic renderer layer
 		- API Abstraction for (OpenGL, Vulcan or DirectX)
 		- Shaders compilation
@@ -59,6 +57,7 @@ Research and refactor old codebase to have a nice structure like that list:
 ##### Singletons
 - `Logger` can be accessed like `LOGGER_CLIENT_INFO("msg")`
 - `EventBus` just to add event use `EVENT_BUS_ADD_EVENT(Event)`
+- `Engine` allows to have one instance
 
 ##### Vendor note
 Dependencies are forked and have minor modifications to use precompiled headers in `imgui` and `glad`. 

@@ -1,9 +1,9 @@
 #pragma once
 
 #include "Core/MacroCore.h"
-#include "Render/Window/IWindow.h"
-#include "Render/Window/Platform/Win/WinWindow.h"
-#include "Render/Gui/GuiLayer.h"
+#include "Platform/IWindow.h"
+#include "Platform/Win/WinWindow.h"
+#include "Graphics/Gui/GuiLayer.h"
 #include "Layer/LayerStack.h"
 
 namespace Nibble {
