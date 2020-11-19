@@ -3,7 +3,7 @@
 #include "KeyEvent.h"
 
 namespace Nibble {
-	class KeyTypedEvent : public KeyEvent {
+	class NIBBLE_API KeyTypedEvent : public KeyEvent {
 	public:
 		KeyTypedEvent(int keycode) : KeyEvent(keycode) {}
 
