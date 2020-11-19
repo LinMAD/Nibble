@@ -69,6 +69,8 @@ namespace Nibble {
 
 		void OnUpdate() override;
 
+		inline virtual void* GetNativeWindow() const { return m_Window; }
+
 		inline unsigned int GetWidth() const override
 		{
 			return m_Data.Width;

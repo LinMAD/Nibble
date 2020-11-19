@@ -21,6 +21,14 @@ namespace Nibble {
 		ImGui::StyleColorsLight();
 
 		ImGuiIO& io = ImGui::GetIO();
+		ImGui::StyleColorsClassic();
+
+		ImGuiStyle& style = ImGui::GetStyle();
+		if (io.ConfigFlags)
+		{
+			style.WindowRounding = 0.0f;
+			style.Colors[ImGuiCol_WindowBg].w = 1.0f;
+		}
 
 		// Mouse
 		io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
@@ -57,8 +65,6 @@ namespace Nibble {
 
 	void GuiLayer::OnEvent(Event& e)
 	{
-		// TODO Improve this slow section
-
 		if (dynamic_cast<WindowResizeEvent*>(&e) != nullptr)
 			OnWindowResizeEvent(dynamic_cast<WindowResizeEvent&>(e));
 
