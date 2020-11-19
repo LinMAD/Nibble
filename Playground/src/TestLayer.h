@@ -15,7 +15,7 @@ namespace Playground {
 
 		void OnEvent(Nibble::Event& e) override
 		{
-			LOGGER_CLIENT_INFO("TestLayer -> {0}", e.ToString());
+			LOGGER_CLIENT_INFO("TestLayer -> Recived event: {0}", e.ToString());
 		}
 	};
 }

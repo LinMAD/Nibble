@@ -3,6 +3,9 @@
 #include "Layer/ILayer.h"
 #include "Event/Window/WindowResizeEvent.h"
 #include "Event/Mouse/MouseButtonPressedEvent.h"
+#include "Event/Mouse/MouseButtonReleasedEvent.h"
+#include "Event/Mouse/MouseMovedEvent.h"
+#include "Event/Mouse/MouseScrolledEvent.h"
 
 namespace Nibble {
 	class GuiLayer : public ILayer {
@@ -20,9 +23,9 @@ namespace Nibble {
 
 		void OnWindowResizeEvent(WindowResizeEvent& e);
 		void OnMouseButtonPressedEvent(MouseButtonPressedEvent& e);
-		//bool OnMouseButtonReleasedEvent(MouseButtonReleasedEvent& e);
-		//bool OnMouseMovedEvent(MouseMovedEvent& e);
-		//bool OnMouseScrolledEvent(MouseScrolledEvent& e);
+		void OnMouseButtonReleasedEvent(MouseButtonReleasedEvent& e);
+		void OnMouseMovedEvent(MouseMovedEvent& e);
+		void OnMouseScrolledEvent(MouseScrolledEvent& e);
 		//bool OnKeyPressedEvent(KeyPressedEvent& e);
 		//bool OnKeyReleasedEvent(KeyReleasedEvent& e);
 		//bool OnKeyTypedEvent(KeyTypedEvent& e);

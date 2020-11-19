@@ -3,6 +3,9 @@
 #include "Event/Window/WindowResizeEvent.h"
 #include "Event/Window/WindowsCloseEvent.h"
 #include "Event/Mouse/MouseButtonPressedEvent.h"
+#include "Event/Mouse/MouseButtonReleasedEvent.h"
+#include "Event/Mouse/MouseMovedEvent.h"
+#include "Event/Mouse/MouseScrolledEvent.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -50,9 +53,6 @@ namespace Nibble {
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 
-		glfwSetWindowSizeCallback(m_Window, WindowResizeCallback);
-		glfwSetWindowCloseCallback(m_Window, WindowCloseCallback);
-
 		if (!s_GladInitialized)
 		{
 			int success = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
@@ -61,19 +61,19 @@ namespace Nibble {
 			s_GladInitialized = true;
 		}
 
+		// WINDOW
+		glfwSetWindowSizeCallback(m_Window, WindowResizeCallback);
+		glfwSetWindowCloseCallback(m_Window, WindowCloseCallback);
+
+		// MOUSE
+		glfwSetMouseButtonCallback(m_Window, MouseButtonCallback);
+		glfwSetCursorPosCallback(m_Window, MouseCursorPostionCallback);
+		glfwSetScrollCallback(m_Window, MouseScrollPostionCallback);
+
 		// TODO Keyboard, Character events
-		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods)
-			{
-				if (action == GLFW_PRESS)
-				{
-					EVENT_BUS_ADD_EVENT(std::make_shared<MouseButtonPressedEvent>(button));
-				}
-				else if (action == GLFW_RELEASE)
-				{
-					M_LOGGER_ENG_INFO("Mouse release evente ->>>>");
-				}
-			}
-		);
+		// KEYBOAD
+
+		// CHARACTERS
 	}
 
 	inline auto WinWindow::WindowResizeCallback(GLFWwindow* win, int w, int h) -> void
@@ -97,6 +97,32 @@ namespace Nibble {
 		glfwSetWindowShouldClose(win, GLFW_TRUE);
 
 		EVENT_BUS_ADD_EVENT(std::make_shared<WindowsCloseEvent>());
+	}
+
+	inline auto WinWindow::MouseButtonCallback(GLFWwindow* window, int button, int action, int mods) -> void
+	{
+		if (action == GLFW_PRESS)
+		{
+			EVENT_BUS_ADD_EVENT(std::make_shared<MouseButtonPressedEvent>(button));
+		}
+		else if (action == GLFW_RELEASE)
+		{
+			EVENT_BUS_ADD_EVENT(std::make_shared<MouseButtonReleasedEvent>(button));
+		}
+	}
+
+	inline auto WinWindow::MouseCursorPostionCallback(GLFWwindow* window, double xPos, double yPos) -> void
+	{
+		EVENT_BUS_ADD_EVENT(std::make_shared<MouseMovedEvent>(xPos, yPos));
+	}
+
+	inline auto WinWindow::MouseScrollPostionCallback(GLFWwindow* window, double xOffset, double yOffset) -> void
+	{
+		EVENT_BUS_ADD_EVENT(std::make_shared<MouseScrolledEvent>(xOffset, yOffset));
+	}
+
+	WinWindow::WinWindow()
+	{
 	}
 
 	WinWindow::WinWindow(const WindowConfiguration& cfg)

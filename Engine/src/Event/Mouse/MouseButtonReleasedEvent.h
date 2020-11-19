@@ -3,10 +3,10 @@
 #include "MouseButtonEvent.h"
 
 namespace Nibble {
-	class MouseButtonPressedEvent : public MouseButtonEvent
+	class MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:
-		MouseButtonPressedEvent(int button) : MouseButtonEvent(button) {}
+		MouseButtonReleasedEvent(int button) : MouseButtonEvent(button) {}
 
 		virtual void SetIsHandled() override;
 		virtual const char* GetName() override;
@@ -14,8 +14,7 @@ namespace Nibble {
 		virtual EventType GetEventType() override;
 		virtual std::string ToString() override;
 	protected:
-		EventType m_EventType = EventType::MouseButtonPressed;
-		const char* m_Name = "MouseButtonPressedEvent";
+		EventType m_EventType = EventType::MouseButtonReleased;
+		const char* m_Name = "MouseButtonReleasedEvent";
 	};
 }
-

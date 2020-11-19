@@ -104,6 +104,15 @@
     <ClInclude Include="src\Event\Mouse\MouseButtonEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Event\Mouse\MouseButtonReleasedEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Event\Mouse\MouseMovedEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Event\Mouse\MouseScrolledEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Traceability\Logger.cpp">
@@ -152,6 +161,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Event\Mouse\MouseButtonPressedEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Event\Mouse\MouseButtonReleasedEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Event\Mouse\MouseMovedEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Event\Mouse\MouseScrolledEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

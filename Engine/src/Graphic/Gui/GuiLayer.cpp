@@ -67,6 +67,24 @@ namespace Nibble {
 			OnMouseButtonPressedEvent(dynamic_cast<MouseButtonPressedEvent&>(e));
 			e.SetIsHandled();
 		}
+
+		if (dynamic_cast<MouseButtonReleasedEvent*>(&e) != nullptr)
+		{
+			OnMouseButtonReleasedEvent(dynamic_cast<MouseButtonReleasedEvent&>(e));
+			e.SetIsHandled();
+		}
+
+		if (dynamic_cast<MouseMovedEvent*>(&e) != nullptr)
+		{
+			OnMouseMovedEvent(dynamic_cast<MouseMovedEvent&>(e));
+			e.SetIsHandled();
+		}
+
+		if (dynamic_cast<MouseScrolledEvent*>(&e) != nullptr)
+		{
+			OnMouseScrolledEvent(dynamic_cast<MouseScrolledEvent&>(e));
+			e.SetIsHandled();
+		}
 	}
 
 	void GuiLayer::OnWindowResizeEvent(WindowResizeEvent& e)
@@ -83,5 +101,24 @@ namespace Nibble {
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		io.MouseDown[e.GetMouseButton()] = true;
+	}
+
+	void GuiLayer::OnMouseButtonReleasedEvent(MouseButtonReleasedEvent& e)
+	{
+		ImGuiIO& io = ImGui::GetIO();
+		io.MouseDown[e.GetMouseButton()] = false;
+	}
+
+	void GuiLayer::OnMouseMovedEvent(MouseMovedEvent& e)
+	{
+		ImGuiIO& io = ImGui::GetIO();
+		io.MousePos = ImVec2(e.GetX(), e.GetY());
+	}
+
+	void GuiLayer::OnMouseScrolledEvent(MouseScrolledEvent& e)
+	{
+		ImGuiIO& io = ImGui::GetIO();
+		io.MouseWheelH += e.GetXOffset();
+		io.MouseWheel += e.GetYOffset();
 	}
 }

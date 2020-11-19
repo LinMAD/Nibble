@@ -24,11 +24,31 @@ namespace Nibble {
 			int w,
 			int h
 		) -> void;
+
 		inline static auto WindowCloseCallback(
 			GLFWwindow* win
 		) -> void;
+
+		inline static auto MouseButtonCallback(
+			GLFWwindow* window, 
+			int button, 
+			int action, 
+			int mods
+		) -> void;
+
+		inline static auto MouseCursorPostionCallback(
+			GLFWwindow* window, 
+			double xPos, 
+			double yPos
+		) -> void;
+
+		inline static auto MouseScrollPostionCallback(
+			GLFWwindow* window,
+			double xOffset,
+			double yOffset
+		) -> void;
 	public:
-		WinWindow() {};
+		WinWindow();
 		WinWindow(const WindowConfiguration& cfg);
 		~WinWindow();
 

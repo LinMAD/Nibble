@@ -26,7 +26,7 @@ Nibble::Event::EventType Nibble::MouseButtonPressedEvent::GetEventType()
 std::string Nibble::MouseButtonPressedEvent::ToString()
 {
 	std::stringstream ss;
-	ss << GetName() << ": Button code -> " << m_Button;
+	ss << m_Name << ": Button code -> " << m_Button;
 
 	return ss.str();
 }

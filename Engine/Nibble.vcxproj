@@ -112,6 +112,9 @@
     <None Include="..\README.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Event\Mouse\MouseScrolledEvent.h" />
+    <ClInclude Include="src\Event\Mouse\MouseMovedEvent.h" />
+    <ClInclude Include="src\Event\Mouse\MouseButtonReleasedEvent.h" />
     <ClInclude Include="src\Event\Mouse\MouseButtonEvent.h" />
     <ClInclude Include="src\Event\Mouse\MouseButtonPressedEvent.h" />
     <ClInclude Include="src\Layer\LayerStack.h" />
@@ -139,7 +142,10 @@
     <ClInclude Include="extern\imgui\imstb_truetype.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Event\Mouse\MouseScrolledEvent.cpp" />
+    <ClCompile Include="src\Event\Mouse\MouseMovedEvent.cpp" />
     <ClCompile Include="src\Event\Mouse\MouseButtonPressedEvent.cpp" />
+    <ClCompile Include="src\Event\Mouse\MouseButtonReleasedEvent.cpp" />
     <ClCompile Include="src\Layer\LayerStack.cpp" />
     <ClCompile Include="src\Core\Engine.cpp" />
     <ClCompile Include="src\Event\EventBus.cpp" />
