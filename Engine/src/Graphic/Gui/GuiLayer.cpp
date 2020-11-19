@@ -39,7 +39,7 @@ namespace Nibble {
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		Engine& eng = Engine::GetInstance();
-		io.DisplaySize = ImVec2(eng.GetWindow().GetWidth(), eng.GetWindow().GetHeight());
+		io.DisplaySize = ImVec2((float)eng.GetWindow().GetWidth(), (float)eng.GetWindow().GetHeight());
 
 		float time = (float)glfwGetTime();
 		io.DeltaTime = m_Time > 0.0f ? (time - m_Time) : (1.0f / 60.0f);
@@ -109,7 +109,7 @@ namespace Nibble {
 	{
 		ImGuiIO& io = ImGui::GetIO();
 
-		io.DisplaySize = ImVec2(e.GetWidth(), e.GetHeight());
+		io.DisplaySize = ImVec2((float)e.GetWidth(), (float)e.GetHeight());
 		io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
 
 		glViewport(0, 0, e.GetWidth(), e.GetHeight());

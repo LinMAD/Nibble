@@ -31,35 +31,20 @@ namespace Nibble {
 		m_Events.push_back(e);
 	}
 
-	void EventBus::RemoveEvent(std::shared_ptr<Event> e)
-	{
-		for (auto eventIter = m_Events.begin(); eventIter != m_Events.end();)
-		{
-			std::shared_ptr<Event> eventInQ = *eventIter;
-			if (eventInQ == nullptr || e->GetName() != eventInQ->GetName())
-				continue;
-
-			eventIter = m_Events.erase(eventIter);
-		}
-	}
-
 	void EventBus::Process(LayerStack ls)
 	{
 		if (m_Events.size() == 0) return;
 
-		for (std::shared_ptr<Event> e : m_Events)
+		for (auto eventIter = m_Events.begin(); eventIter != m_Events.end();)
 		{
-			if (e == nullptr) continue;
+			std::shared_ptr<Event> eventInQ = *eventIter;
+			if (eventInQ == nullptr) continue;
 
-			for (auto it = ls.end(); it != ls.begin(); )
-			{
-				auto &layer = (*--it);
-				if (layer == nullptr) continue;
+			for (std::shared_ptr<ILayer> l : ls)
+				l->OnEvent(*eventInQ);
 
-				layer->OnEvent(*e);
-			}
-
-			if (e->IsHandled()) RemoveEvent(e);
+			if (eventInQ->IsHandled()) 
+				eventIter = m_Events.erase(eventIter);
 		}
 	}
 }

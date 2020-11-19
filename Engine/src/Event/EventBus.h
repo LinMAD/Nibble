@@ -21,7 +21,6 @@ namespace Nibble {
 
 		std::shared_ptr<Event> DispatchEvent(Event::EventType type);
 		void RegisterEvent(std::shared_ptr<Event> e);
-		void RemoveEvent(std::shared_ptr<Event> e);
 		void Process(LayerStack ls);
 	};
 }
