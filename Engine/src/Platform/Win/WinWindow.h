@@ -47,6 +47,19 @@ namespace Nibble {
 			double xOffset,
 			double yOffset
 		) -> void;
+
+		inline static auto KeyButtonCallback(
+			GLFWwindow* window, 
+			int key, 
+			int scancode, 
+			int action, 
+			int mods
+		) -> void;
+
+		inline static auto KeyCharacterCallback(
+			GLFWwindow* window,
+			unsigned int keycode
+		) -> void;
 	public:
 		WinWindow();
 		WinWindow(const WindowConfiguration& cfg);

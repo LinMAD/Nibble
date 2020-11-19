@@ -1,0 +1,18 @@
+#pragma once
+
+#include "Event/Event.h"
+
+namespace Nibble {
+	class KeyEvent : public Event {
+	public:
+		KeyEvent(int keycode) : m_KeyCode(keycode) {}
+
+		inline int GetKeyCode() const 
+		{ 
+			return m_KeyCode; 
+		}
+	protected:
+		int m_CategoryFlags = EventCategory::Keyboard | EventCategory::Input;
+		int m_KeyCode;
+	};
+}

@@ -112,6 +112,10 @@
     <None Include="..\README.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Event\Keyboard\KeyTypedEvent.h" />
+    <ClInclude Include="src\Event\Keyboard\KeyReleasedEvent.h" />
+    <ClInclude Include="src\Event\Keyboard\KeyPressedEvent.h" />
+    <ClInclude Include="src\Event\Keyboard\KeyEvent.h" />
     <ClInclude Include="src\Event\Mouse\MouseScrolledEvent.h" />
     <ClInclude Include="src\Event\Mouse\MouseMovedEvent.h" />
     <ClInclude Include="src\Event\Mouse\MouseButtonReleasedEvent.h" />
@@ -142,6 +146,9 @@
     <ClInclude Include="extern\imgui\imstb_truetype.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Event\Keyboard\KeyTypedEvent.cpp" />
+    <ClCompile Include="src\Event\Keyboard\KeyReleasedEvent.cpp" />
+    <ClCompile Include="src\Event\Keyboard\KeyPressedEvent.cpp" />
     <ClCompile Include="src\Event\Mouse\MouseScrolledEvent.cpp" />
     <ClCompile Include="src\Event\Mouse\MouseMovedEvent.cpp" />
     <ClCompile Include="src\Event\Mouse\MouseButtonPressedEvent.cpp" />

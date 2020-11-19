@@ -6,6 +6,9 @@
 #include "Event/Mouse/MouseButtonReleasedEvent.h"
 #include "Event/Mouse/MouseMovedEvent.h"
 #include "Event/Mouse/MouseScrolledEvent.h"
+#include "Event/Keyboard/KeyPressedEvent.h"
+#include "Event/Keyboard/KeyReleasedEvent.h"
+#include "Event/Keyboard/KeyTypedEvent.h"
 
 namespace Nibble {
 	class GuiLayer : public ILayer {
@@ -26,8 +29,8 @@ namespace Nibble {
 		void OnMouseButtonReleasedEvent(MouseButtonReleasedEvent& e);
 		void OnMouseMovedEvent(MouseMovedEvent& e);
 		void OnMouseScrolledEvent(MouseScrolledEvent& e);
-		//bool OnKeyPressedEvent(KeyPressedEvent& e);
-		//bool OnKeyReleasedEvent(KeyReleasedEvent& e);
-		//bool OnKeyTypedEvent(KeyTypedEvent& e);
+		void OnKeyPressedEvent(KeyPressedEvent& e);
+		void OnKeyReleasedEvent(KeyReleasedEvent& e);
+		void OnKeyTypedEvent(KeyTypedEvent& e);
 	};
 }

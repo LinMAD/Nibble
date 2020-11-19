@@ -6,6 +6,9 @@
 #include "Event/Mouse/MouseButtonReleasedEvent.h"
 #include "Event/Mouse/MouseMovedEvent.h"
 #include "Event/Mouse/MouseScrolledEvent.h"
+#include "Event/Keyboard/KeyPressedEvent.h"
+#include "Event/Keyboard/KeyReleasedEvent.h"
+#include "Event/Keyboard/KeyTypedEvent.h"
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -70,10 +73,9 @@ namespace Nibble {
 		glfwSetCursorPosCallback(m_Window, MouseCursorPostionCallback);
 		glfwSetScrollCallback(m_Window, MouseScrollPostionCallback);
 
-		// TODO Keyboard, Character events
 		// KEYBOAD
-
-		// CHARACTERS
+		glfwSetKeyCallback(m_Window, KeyButtonCallback);
+		glfwSetCharCallback(m_Window, KeyCharacterCallback);
 	}
 
 	inline auto WinWindow::WindowResizeCallback(GLFWwindow* win, int w, int h) -> void
@@ -119,6 +121,33 @@ namespace Nibble {
 	inline auto WinWindow::MouseScrollPostionCallback(GLFWwindow* window, double xOffset, double yOffset) -> void
 	{
 		EVENT_BUS_ADD_EVENT(std::make_shared<MouseScrolledEvent>(xOffset, yOffset));
+	}
+
+	inline auto WinWindow::KeyButtonCallback(GLFWwindow* window, int key, int scancode, int action, int mods) -> void
+	{
+		switch (action)
+		{
+			case GLFW_PRESS:
+			{
+				EVENT_BUS_ADD_EVENT(std::make_shared<KeyPressedEvent>(key, 0));
+				break;
+			}
+			case GLFW_RELEASE:
+			{
+				EVENT_BUS_ADD_EVENT(std::make_shared<KeyReleasedEvent>(key));
+				break;
+			}
+			case GLFW_REPEAT:
+			{
+				EVENT_BUS_ADD_EVENT(std::make_shared<KeyPressedEvent>(key, 1));
+				break;
+			}
+		}
+	}
+
+	inline auto WinWindow::KeyCharacterCallback(GLFWwindow* window, unsigned int keycode) -> void
+	{
+		EVENT_BUS_ADD_EVENT(std::make_shared<KeyTypedEvent>(keycode));
 	}
 
 	WinWindow::WinWindow()

@@ -85,6 +85,24 @@ namespace Nibble {
 			OnMouseScrolledEvent(dynamic_cast<MouseScrolledEvent&>(e));
 			e.SetIsHandled();
 		}
+
+		if (dynamic_cast<KeyPressedEvent*>(&e) != nullptr)
+		{
+			OnKeyPressedEvent(dynamic_cast<KeyPressedEvent&>(e));
+			e.SetIsHandled();
+		}
+
+		if (dynamic_cast<KeyReleasedEvent*>(&e) != nullptr)
+		{
+			OnKeyReleasedEvent(dynamic_cast<KeyReleasedEvent&>(e));
+			e.SetIsHandled();
+		}
+
+		if (dynamic_cast<KeyTypedEvent*>(&e) != nullptr)
+		{
+			OnKeyTypedEvent(dynamic_cast<KeyTypedEvent&>(e));
+			e.SetIsHandled();
+		}
 	}
 
 	void GuiLayer::OnWindowResizeEvent(WindowResizeEvent& e)
@@ -120,5 +138,31 @@ namespace Nibble {
 		ImGuiIO& io = ImGui::GetIO();
 		io.MouseWheelH += e.GetXOffset();
 		io.MouseWheel += e.GetYOffset();
+	}
+
+	void GuiLayer::OnKeyPressedEvent(KeyPressedEvent& e)
+	{
+		ImGuiIO& io = ImGui::GetIO();
+
+		io.KeysDown[e.GetKeyCode()] = true;
+		io.KeyCtrl = io.KeysDown[GLFW_KEY_LEFT_CONTROL] || io.KeysDown[GLFW_KEY_RIGHT_CONTROL];
+		io.KeyShift = io.KeysDown[GLFW_KEY_LEFT_SHIFT] || io.KeysDown[GLFW_KEY_RIGHT_SHIFT];
+		io.KeyAlt = io.KeysDown[GLFW_KEY_LEFT_ALT] || io.KeysDown[GLFW_KEY_RIGHT_ALT];
+		io.KeySuper = io.KeysDown[GLFW_KEY_LEFT_SUPER] || io.KeysDown[GLFW_KEY_RIGHT_SUPER];
+	}
+
+	void GuiLayer::OnKeyReleasedEvent(KeyReleasedEvent& e)
+	{
+		ImGuiIO& io = ImGui::GetIO();
+		io.KeysDown[e.GetKeyCode()] = false;
+	}
+
+	void GuiLayer::OnKeyTypedEvent(KeyTypedEvent& e)
+	{
+		ImGuiIO& io = ImGui::GetIO();
+		int keycode = e.GetKeyCode();
+
+		if (keycode > 0 && keycode < 0x10000)
+			io.AddInputCharacter((unsigned short)keycode);
 	}
 }
