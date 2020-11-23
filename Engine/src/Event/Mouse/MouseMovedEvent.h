@@ -3,7 +3,7 @@
 #include "Event/Event.h"
 
 namespace Nibble {
-	class NIBBLE_API MouseMovedEvent : public Event {
+	class NIBBLE_EXPORT_API MouseMovedEvent : public Event {
 	public:
 		MouseMovedEvent(float x, float y) : m_MouseX(x), m_MouseY(y) {}
 

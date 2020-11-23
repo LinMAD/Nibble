@@ -3,7 +3,7 @@
 #include "Event/Event.h"
 
 namespace Nibble {
-	class NIBBLE_API MouseScrolledEvent : public Event {
+	class NIBBLE_EXPORT_API MouseScrolledEvent : public Event {
 	public:
 		MouseScrolledEvent(float xOffset, float yOffset) : m_XOffset(xOffset), m_YOffset(yOffset) {}
 

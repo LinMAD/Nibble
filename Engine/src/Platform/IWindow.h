@@ -2,6 +2,7 @@
 
 #include "pch.h"
 #include "Core/MacroCore.h"
+#include "Graphic/IGraphicsContext.h"
 
 namespace Nibble {
 	struct WindowConfiguration
@@ -20,7 +21,7 @@ namespace Nibble {
 		}
 	};
 
-	class NIBBLE_API IWindow
+	class NIBBLE_EXPORT_API IWindow
 	{
 	public:
 		virtual void OnUpdate() = 0;
@@ -33,5 +34,7 @@ namespace Nibble {
 		virtual bool IsVSync() const = 0;
 
 		virtual IWindow* Create(const WindowConfiguration& props = WindowConfiguration()) = 0;
+	protected:
+		IGraphicsContext* m_GraphicsContext;
 	};
 }

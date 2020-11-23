@@ -59,9 +59,9 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NIBBLE_PLATFORM_WINDOWS;NIBBLE_BUILD_DLL;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NIBBLE_PLATFORM_WINDOWS;NIBBLE_BUILD_DLL;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;IMGUI_IMPL_OPENGL_LOADER_GLAD;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine\src;$(SolutionDir)Engine\extern\glfw\include;$(SolutionDir)Engine\extern\spdlog\include;$(SolutionDir)Engine\extern\glad\include;$(SolutionDir)Engine\extern\imgui;$(SolutionDir)Engine\vendor\glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\src;$(SolutionDir)Engine\extern\spdlog\include;$(SolutionDir)Engine\extern\glad\include;$(SolutionDir)Engine\extern\glfw\include;$(SolutionDir)Engine\extern\glm;$(SolutionDir)Engine\extern\imgui;$(SolutionDir)Engine\vendor\glad\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -84,9 +84,9 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NIBBLE_PLATFORM_WINDOWS;NIBBLE_BUILD_DLL;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NIBBLE_PLATFORM_WINDOWS;NIBBLE_BUILD_DLL;GLFW_INCLUDE_NONE;_CRT_SECURE_NO_WARNINGS;IMGUI_IMPL_OPENGL_LOADER_GLAD;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine\src;$(SolutionDir)Engine\extern\glfw\include;$(SolutionDir)Engine\extern\spdlog\include;$(SolutionDir)Engine\extern\glad\include;$(SolutionDir)Engine\extern\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\src;$(SolutionDir)Engine\extern\spdlog\include;$(SolutionDir)Engine\extern\glad\include;$(SolutionDir)Engine\extern\glfw\include;$(SolutionDir)Engine\extern\glm;$(SolutionDir)Engine\extern\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -96,7 +96,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)Engine\extern\glfw\lib-vc2019;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
@@ -112,6 +112,8 @@
     <None Include="..\README.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="extern\imgui\imconfig.h" />
+    <ClInclude Include="src\Graphic\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Event\Keyboard\KeyTypedEvent.h" />
     <ClInclude Include="src\Event\Keyboard\KeyReleasedEvent.h" />
     <ClInclude Include="src\Event\Keyboard\KeyPressedEvent.h" />
@@ -121,6 +123,7 @@
     <ClInclude Include="src\Event\Mouse\MouseButtonReleasedEvent.h" />
     <ClInclude Include="src\Event\Mouse\MouseButtonEvent.h" />
     <ClInclude Include="src\Event\Mouse\MouseButtonPressedEvent.h" />
+    <ClInclude Include="src\Graphic\IGraphicsContext.h" />
     <ClInclude Include="src\Layer\LayerStack.h" />
     <ClInclude Include="src\Layer\ILayer.h" />
     <ClInclude Include="src\Event\Event.h" />
@@ -129,23 +132,23 @@
     <ClInclude Include="src\Core\EngineMainEntry.h" />
     <ClInclude Include="src\Event\Window\WindowResizeEvent.h" />
     <ClInclude Include="src\pch.h" />
-    <ClInclude Include="src\Graphic\Gui\GuiLayer.h" />
-    <ClInclude Include="src\Platform\OpenGL\ImGuiImplOpenGLRenderer.h" />
+    <ClInclude Include="src\Layer\Gui\GuiLayer.h" />
     <ClInclude Include="src\Platform\IWindow.h" />
-    <ClInclude Include="src\Platform\Win\WinWindow.h" />
+    <ClInclude Include="src\Platform\Windows\WinWindow.h" />
     <ClInclude Include="src\Traceability\Logger.h" />
     <ClInclude Include="src\Core\MacroPlatform.h" />
     <ClInclude Include="src\Core\MacroCore.h" />
     <ClInclude Include="src\Nibble.h" />
-    <ClInclude Include="src\Event\Window\WindowsCloseEvent.h" />
-    <ClInclude Include="extern\imgui\imconfig.h" />
-    <ClInclude Include="extern\imgui\imgui.h" />
-    <ClInclude Include="extern\imgui\imgui_internal.h" />
-    <ClInclude Include="extern\imgui\imstb_rectpack.h" />
-    <ClInclude Include="extern\imgui\imstb_textedit.h" />
-    <ClInclude Include="extern\imgui\imstb_truetype.h" />
+    <ClInclude Include="src\Event\Window\WindowCloseEvent.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="extern\imgui\backends\imgui_impl_glfw.cpp" />
+    <ClCompile Include="extern\imgui\backends\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="extern\imgui\imgui.cpp" />
+    <ClCompile Include="extern\imgui\imgui_demo.cpp" />
+    <ClCompile Include="extern\imgui\imgui_draw.cpp" />
+    <ClCompile Include="extern\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="src\Graphic\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Event\Keyboard\KeyTypedEvent.cpp" />
     <ClCompile Include="src\Event\Keyboard\KeyReleasedEvent.cpp" />
     <ClCompile Include="src\Event\Keyboard\KeyPressedEvent.cpp" />
@@ -163,24 +166,14 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Release|x64'">pch.h</PrecompiledHeaderFile>
     </ClCompile>
-    <ClCompile Include="src\Graphic\Gui\GuiLayer.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\ImGuiImplOpenGLRenderer.cpp" />
-    <ClCompile Include="src\Platform\Win\WinWindow.cpp" />
+    <ClCompile Include="src\Layer\Gui\GuiLayer.cpp" />
+    <ClCompile Include="src\Platform\Windows\WinWindow.cpp" />
     <ClCompile Include="src\Traceability\Logger.cpp" />
-    <ClCompile Include="src\Event\Window\WindowsCloseEvent.cpp" />
+    <ClCompile Include="src\Event\Window\WindowCloseEvent.cpp" />
     <ClCompile Include="extern\glad\src\glad.c">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsCpp</CompileAs>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">CompileAsCpp</CompileAs>
     </ClCompile>
-    <ClCompile Include="extern\imgui\imgui.cpp" />
-    <ClCompile Include="extern\imgui\imgui_demo.cpp" />
-    <ClCompile Include="extern\imgui\imgui_draw.cpp" />
-    <ClCompile Include="extern\imgui\imgui_widgets.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="vendor\glad\glad.vcxproj">
-      <Project>{cd2ac379-71c7-4e6c-996a-11d0d2c55d83}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

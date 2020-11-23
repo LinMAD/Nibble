@@ -4,7 +4,7 @@
 #include "ILayer.h"
 
 namespace Nibble {
-	class NIBBLE_API LayerStack
+	class NIBBLE_EXPORT_API LayerStack
 	{
 	public:
 		LayerStack() = default;

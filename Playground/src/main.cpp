@@ -7,7 +7,7 @@ namespace Playground {
 	public:
 		ClientApplication()
 		{
-			PushLayer(std::make_shared<TestLayer>());
+			//PushLayer(std::make_shared<TestLayer>());
 		}
 		~ClientApplication() {}
 	};

@@ -3,7 +3,7 @@
 #include "MouseButtonEvent.h"
 
 namespace Nibble {
-	class NIBBLE_API MouseButtonReleasedEvent : public MouseButtonEvent
+	class NIBBLE_EXPORT_API MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonReleasedEvent(int button) : MouseButtonEvent(button) {}

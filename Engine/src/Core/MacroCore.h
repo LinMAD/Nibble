@@ -7,9 +7,9 @@
 
 #ifdef NIBBLE_BUILD_DLL
 
-#define NIBBLE_API __declspec(dllexport)
+#define NIBBLE_EXPORT_API __declspec(dllexport)
 #else
-#define NIBBLE_API __declspec(dllimport)
+#define NIBBLE_EXPORT_API __declspec(dllimport)
 #endif // NIBBLE_BUILD_DLL
 
 #else
@@ -21,13 +21,13 @@
 // Assert debug
 #ifdef NIBBLE_DEBUG
 
-#define NIBBLE_CORE_ASSERT(x, ...) { if(!(x)) { LOGGER_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
-#define NIBBLE_APP_ASSERT(x, ...) { if(!(x)) { LOGGER_APP_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+#define M_NIBBLE_ENG_ASSERT(x, ...) { if(!(x)) { LOGGER_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+#define NIBBLE_CLIENT_ASSERT(x, ...) { if(!(x)) { LOGGER_APP_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
 
 #else
 
-#define NIBBLE_CORE_ASSERT(x, ...)
-#define NIBBLE_APP_ASSERT(x, ...)
+#define M_NIBBLE_ENG_ASSERT(x, ...)
+#define NIBBLE_CLIENT_ASSERT(x, ...)
 
-#endif // End of NDEBUG
+#endif // End of NIBBLE_DEBUG
 // End of assert debug

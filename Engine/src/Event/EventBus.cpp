@@ -31,6 +31,10 @@ namespace Nibble {
 		m_Events.push_back(e);
 	}
 
+	/// <summary>
+	/// Notify layers with events
+	/// </summary>
+	/// <param name="ls">LayerStack</param>
 	void EventBus::Process(LayerStack ls)
 	{
 		if (m_Events.size() == 0) return;
@@ -40,11 +44,10 @@ namespace Nibble {
 			std::shared_ptr<Event> eventInQ = *eventIter;
 			if (eventInQ == nullptr) continue;
 
-			for (std::shared_ptr<ILayer> l : ls)
+			for (std::shared_ptr<ILayer> l : ls) 
 				l->OnEvent(*eventInQ);
 
-			if (eventInQ->IsHandled()) 
-				eventIter = m_Events.erase(eventIter);
+			eventIter = m_Events.erase(eventIter);
 		}
 	}
 }

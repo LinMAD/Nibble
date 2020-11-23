@@ -71,3 +71,6 @@ int
 
 # Env relted
 *.user
+
+# Project related
+Playground/imgui.ini

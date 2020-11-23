@@ -2,12 +2,12 @@
 
 #include "Core/MacroCore.h"
 #include "Platform/IWindow.h"
-#include "Platform/Win/WinWindow.h"
-#include "Graphic/Gui/GuiLayer.h"
+#include "Platform/Windows/WinWindow.h"
+#include "Layer/Gui/GuiLayer.h"
 #include "Layer/LayerStack.h"
 
 namespace Nibble {
-	class NIBBLE_API Engine
+	class NIBBLE_EXPORT_API Engine
 	{
 	public:
 		Engine();
@@ -19,8 +19,14 @@ namespace Nibble {
 
 		void Run();
 
-		inline IWindow& GetWindow() { return *m_Window; }
-		inline static Engine& GetInstance() { return *s_Instance; }
+		inline IWindow& GetWindow() 
+		{
+			return *m_Window; 
+		}
+		inline static Engine& GetInstance() 
+		{ 
+			return *s_Instance;
+		}
 	private:
 		static Engine* s_Instance;
 
@@ -28,7 +34,9 @@ namespace Nibble {
 		LayerStack m_LayerStack;
 		std::shared_ptr<GuiLayer> m_GuiLayer;
 
-		bool m_running = true;
+		bool m_Running = true;
+
+		unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
 	};
 
 	Engine* InitilizeEngine();

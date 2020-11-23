@@ -4,7 +4,7 @@
 #include "Core/MacroCore.h"
 
 namespace Nibble {
-	class NIBBLE_API Logger
+	class NIBBLE_EXPORT_API Logger
 	{
 	private:
 		static std::shared_ptr<spdlog::logger> s_CoreLogger;

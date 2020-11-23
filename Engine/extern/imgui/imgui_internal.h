@@ -92,8 +92,6 @@ struct ImRect;                      // An axis-aligned rectangle (2 points)
 struct ImDrawDataBuilder;           // Helper to build a ImDrawData instance
 struct ImDrawListSharedData;        // Data shared between all ImDrawList instances
 struct ImGuiColorMod;               // Stacked color modifier, backup of modified data so we can restore it
-struct ImGuiColumnData;             // Storage data for a single column
-struct ImGuiColumns;                // Storage data for a columns set
 struct ImGuiContext;                // Main Dear ImGui context
 struct ImGuiContextHook;            // Hook for extensions like ImGuiTestEngine
 struct ImGuiDataTypeInfo;           // Type information associated to a ImGuiDataType enum
@@ -105,6 +103,8 @@ struct ImGuiNavMoveResult;          // Result of a gamepad/keyboard directional 
 struct ImGuiMetricsConfig;          // Storage for ShowMetricsWindow() and DebugNodeXXX() functions
 struct ImGuiNextWindowData;         // Storage for SetNextWindow** functions
 struct ImGuiNextItemData;           // Storage for SetNextItem** functions
+struct ImGuiOldColumnData;          // Storage data for a single column for legacy Columns() api
+struct ImGuiOldColumns;             // Storage data for a columns set for legacy Columns() api
 struct ImGuiPopupData;              // Storage for current popup stack
 struct ImGuiSettingsHandler;        // Storage for one type registered in the .ini file
 struct ImGuiStackSizes;             // Storage of stack sizes for debugging/asserting
@@ -117,10 +117,9 @@ struct ImGuiWindowSettings;         // Storage for a window .ini settings (we ke
 
 // Use your programming IDE "Go to definition" facility on the names of the center columns to find the actual flags/enum lists.
 typedef int ImGuiLayoutType;            // -> enum ImGuiLayoutType_         // Enum: Horizontal or vertical
-typedef int ImGuiButtonFlags;           // -> enum ImGuiButtonFlags_        // Flags: for ButtonEx(), ButtonBehavior()
-typedef int ImGuiColumnsFlags;          // -> enum ImGuiColumnsFlags_       // Flags: BeginColumns()
 typedef int ImGuiItemFlags;             // -> enum ImGuiItemFlags_          // Flags: for PushItemFlag()
 typedef int ImGuiItemStatusFlags;       // -> enum ImGuiItemStatusFlags_    // Flags: for DC.LastItemStatusFlags
+typedef int ImGuiOldColumnFlags;        // -> enum ImGuiOldColumnFlags_     // Flags: for BeginColumns()
 typedef int ImGuiNavHighlightFlags;     // -> enum ImGuiNavHighlightFlags_  // Flags: for RenderNavHighlight()
 typedef int ImGuiNavDirSourceFlags;     // -> enum ImGuiNavDirSourceFlags_  // Flags: for GetNavInputAmount2d()
 typedef int ImGuiNavMoveFlags;          // -> enum ImGuiNavMoveFlags_       // Flags: for navigation requests
@@ -129,6 +128,8 @@ typedef int ImGuiNextWindowDataFlags;   // -> enum ImGuiNextWindowDataFlags_// F
 typedef int ImGuiSeparatorFlags;        // -> enum ImGuiSeparatorFlags_     // Flags: for SeparatorEx()
 typedef int ImGuiTextFlags;             // -> enum ImGuiTextFlags_          // Flags: for TextEx()
 typedef int ImGuiTooltipFlags;          // -> enum ImGuiTooltipFlags_       // Flags: for BeginTooltipEx()
+
+typedef void (*ImGuiErrorLogCallback)(void* user_data, const char* fmt, ...);
 
 //-----------------------------------------------------------------------------
 // [SECTION] Context pointer
@@ -991,31 +992,41 @@ struct ImGuiPtrOrIndex
 // [SECTION] Columns support
 //-----------------------------------------------------------------------------
 
-enum ImGuiColumnsFlags_
+// Flags for internal's BeginColumns(). Prefix using BeginTable() nowadays!
+enum ImGuiOldColumnFlags_
 {
-    // Default: 0
-    ImGuiColumnsFlags_None                  = 0,
-    ImGuiColumnsFlags_NoBorder              = 1 << 0,   // Disable column dividers
-    ImGuiColumnsFlags_NoResize              = 1 << 1,   // Disable resizing columns when clicking on the dividers
-    ImGuiColumnsFlags_NoPreserveWidths      = 1 << 2,   // Disable column width preservation when adjusting columns
-    ImGuiColumnsFlags_NoForceWithinWindow   = 1 << 3,   // Disable forcing columns to fit within window
-    ImGuiColumnsFlags_GrowParentContentsSize= 1 << 4    // (WIP) Restore pre-1.51 behavior of extending the parent window contents size but _without affecting the columns width at all_. Will eventually remove.
+    ImGuiOldColumnFlags_None                    = 0,
+    ImGuiOldColumnFlags_NoBorder                = 1 << 0,   // Disable column dividers
+    ImGuiOldColumnFlags_NoResize                = 1 << 1,   // Disable resizing columns when clicking on the dividers
+    ImGuiOldColumnFlags_NoPreserveWidths        = 1 << 2,   // Disable column width preservation when adjusting columns
+    ImGuiOldColumnFlags_NoForceWithinWindow     = 1 << 3,   // Disable forcing columns to fit within window
+    ImGuiOldColumnFlags_GrowParentContentsSize  = 1 << 4    // (WIP) Restore pre-1.51 behavior of extending the parent window contents size but _without affecting the columns width at all_. Will eventually remove.
+
+    // Obsolete names (will be removed)
+#ifndef IMGUI_DISABLE_OBSOLETE_FUNCTIONS
+    , ImGuiColumnsFlags_None                    = ImGuiOldColumnFlags_None,
+    ImGuiColumnsFlags_NoBorder                  = ImGuiOldColumnFlags_NoBorder,
+    ImGuiColumnsFlags_NoResize                  = ImGuiOldColumnFlags_NoResize,
+    ImGuiColumnsFlags_NoPreserveWidths          = ImGuiOldColumnFlags_NoPreserveWidths,
+    ImGuiColumnsFlags_NoForceWithinWindow       = ImGuiOldColumnFlags_NoForceWithinWindow,
+    ImGuiColumnsFlags_GrowParentContentsSize    = ImGuiOldColumnFlags_GrowParentContentsSize
+#endif
 };
 
-struct ImGuiColumnData
+struct ImGuiOldColumnData
 {
     float               OffsetNorm;         // Column start offset, normalized 0.0 (far left) -> 1.0 (far right)
     float               OffsetNormBeforeResize;
-    ImGuiColumnsFlags   Flags;              // Not exposed
+    ImGuiOldColumnFlags Flags;              // Not exposed
     ImRect              ClipRect;
 
-    ImGuiColumnData()   { memset(this, 0, sizeof(*this)); }
+    ImGuiOldColumnData() { memset(this, 0, sizeof(*this)); }
 };
 
-struct ImGuiColumns
+struct ImGuiOldColumns
 {
     ImGuiID             ID;
-    ImGuiColumnsFlags   Flags;
+    ImGuiOldColumnFlags Flags;
     bool                IsFirstFrame;
     bool                IsBeingResized;
     int                 Current;
@@ -1027,10 +1038,10 @@ struct ImGuiColumns
     ImRect              HostInitialClipRect;    // Backup of ClipRect at the time of BeginColumns()
     ImRect              HostBackupClipRect;     // Backup of ClipRect during PushColumnsBackground()/PopColumnsBackground()
     ImRect              HostBackupParentWorkRect;//Backup of WorkRect at the time of BeginColumns()
-    ImVector<ImGuiColumnData> Columns;
+    ImVector<ImGuiOldColumnData> Columns;
     ImDrawListSplitter  Splitter;
 
-    ImGuiColumns()      { memset(this, 0, sizeof(*this)); }
+    ImGuiOldColumns()   { memset(this, 0, sizeof(*this)); }
 };
 
 //-----------------------------------------------------------------------------
@@ -1128,8 +1139,8 @@ struct IMGUI_API ImGuiStackSizes
     short   SizeOfBeginPopupStack;
 
     ImGuiStackSizes() { memset(this, 0, sizeof(*this)); }
-    IMGUI_API void SetToCurrentState();
-    IMGUI_API void CompareWithCurrentState();
+    void SetToCurrentState();
+    void CompareWithCurrentState();
 };
 
 //-----------------------------------------------------------------------------
@@ -1569,7 +1580,7 @@ struct IMGUI_API ImGuiWindowTempData
     ImU32                   TreeJumpToParentOnPopMask; // Store a copy of !g.NavIdIsAlive for TreeDepth 0..31.. Could be turned into a ImU64 if necessary.
     ImVector<ImGuiWindow*>  ChildWindows;
     ImGuiStorage*           StateStorage;           // Current persistent per-window storage (store e.g. tree node open/close state)
-    ImGuiColumns*           CurrentColumns;         // Current columns set
+    ImGuiOldColumns*        CurrentColumns;         // Current columns set
     ImGuiLayoutType         LayoutType;
     ImGuiLayoutType         ParentLayoutType;       // Layout type of parent window at the time of Begin()
     int                     FocusCounterRegular;    // (Legacy Focus/Tabbing system) Sequential counter, start at -1 and increase as assigned via FocusableItemRegister() (FIXME-NAV: Needs redesign)
@@ -1655,7 +1666,7 @@ struct IMGUI_API ImGuiWindow
     float                   LastTimeActive;                     // Last timestamp the window was Active (using float as we don't need high precision there)
     float                   ItemWidthDefault;
     ImGuiStorage            StateStorage;
-    ImVector<ImGuiColumns>  ColumnsStorage;
+    ImVector<ImGuiOldColumns> ColumnsStorage;
     float                   FontWindowScale;                    // User scale multiplier per-window, via SetWindowFontScale()
     int                     SettingsOffset;                     // Offset into SettingsWindows[] (offsets are always valid as we only grow the array from the back)
 
@@ -1816,6 +1827,7 @@ namespace ImGui
     IMGUI_API void          UpdateWindowParentAndRootLinks(ImGuiWindow* window, ImGuiWindowFlags flags, ImGuiWindow* parent_window);
     IMGUI_API ImVec2        CalcWindowExpectedSize(ImGuiWindow* window);
     IMGUI_API bool          IsWindowChildOf(ImGuiWindow* window, ImGuiWindow* potential_parent);
+    IMGUI_API bool          IsWindowAbove(ImGuiWindow* potential_above, ImGuiWindow* potential_below);
     IMGUI_API bool          IsWindowNavFocusable(ImGuiWindow* window);
     IMGUI_API ImRect        GetWindowAllowedExtentRect(ImGuiWindow* window);
     IMGUI_API void          SetWindowPos(ImGuiWindow* window, const ImVec2& pos, ImGuiCond cond = 0);
@@ -1955,15 +1967,15 @@ namespace ImGui
 
     // Internal Columns API (this is not exposed because we will encourage transitioning to the Tables API)
     IMGUI_API void          SetWindowClipRectBeforeSetChannel(ImGuiWindow* window, const ImRect& clip_rect);
-    IMGUI_API void          BeginColumns(const char* str_id, int count, ImGuiColumnsFlags flags = 0); // setup number of columns. use an identifier to distinguish multiple column sets. close with EndColumns().
-    IMGUI_API void          EndColumns();                                                             // close columns
+    IMGUI_API void          BeginColumns(const char* str_id, int count, ImGuiOldColumnFlags flags = 0); // setup number of columns. use an identifier to distinguish multiple column sets. close with EndColumns().
+    IMGUI_API void          EndColumns();                                                               // close columns
     IMGUI_API void          PushColumnClipRect(int column_index);
     IMGUI_API void          PushColumnsBackground();
     IMGUI_API void          PopColumnsBackground();
     IMGUI_API ImGuiID       GetColumnsID(const char* str_id, int count);
-    IMGUI_API ImGuiColumns* FindOrCreateColumns(ImGuiWindow* window, ImGuiID id);
-    IMGUI_API float         GetColumnOffsetFromNorm(const ImGuiColumns* columns, float offset_norm);
-    IMGUI_API float         GetColumnNormFromOffset(const ImGuiColumns* columns, float offset);
+    IMGUI_API ImGuiOldColumns* FindOrCreateColumns(ImGuiWindow* window, ImGuiID id);
+    IMGUI_API float         GetColumnOffsetFromNorm(const ImGuiOldColumns* columns, float offset_norm);
+    IMGUI_API float         GetColumnNormFromOffset(const ImGuiOldColumns* columns, float offset);
 
     // Tab Bars
     IMGUI_API bool          BeginTabBarEx(ImGuiTabBar* tab_bar, const ImRect& bb, ImGuiTabBarFlags flags);
@@ -2073,10 +2085,11 @@ namespace ImGui
     IMGUI_API void          GcAwakeTransientWindowBuffers(ImGuiWindow* window);
 
     // Debug Tools
+    IMGUI_API void          ErrorCheckEndFrameRecover(ImGuiErrorLogCallback log_callback, void* user_data = NULL);
     inline void             DebugDrawItemRect(ImU32 col = IM_COL32(255,0,0,255))    { ImGuiContext& g = *GImGui; ImGuiWindow* window = g.CurrentWindow; GetForegroundDrawList(window)->AddRect(window->DC.LastItemRect.Min, window->DC.LastItemRect.Max, col); }
     inline void             DebugStartItemPicker()                                  { ImGuiContext& g = *GImGui; g.DebugItemPickerActive = true; }
 
-    IMGUI_API void          DebugNodeColumns(ImGuiColumns* columns);
+    IMGUI_API void          DebugNodeColumns(ImGuiOldColumns* columns);
     IMGUI_API void          DebugNodeDrawList(ImGuiWindow* window, const ImDrawList* draw_list, const char* label);
     IMGUI_API void          DebugNodeDrawCmdShowMeshAndBoundingBox(ImGuiWindow* window, const ImDrawList* draw_list, const ImDrawCmd* draw_cmd, bool show_mesh, bool show_aabb);
     IMGUI_API void          DebugNodeStorage(ImGuiStorage* storage, const char* label);

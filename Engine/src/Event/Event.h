@@ -3,7 +3,7 @@
 #include "Core/MacroCore.h"
 
 namespace Nibble {
-	class NIBBLE_API Event {
+	class NIBBLE_EXPORT_API Event {
 	public:
 		enum EventType
 		{

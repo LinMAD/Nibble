@@ -10,11 +10,11 @@ int main(int argc, char** argv)
 	Nibble::Logger::Init();
 	M_LOGGER_ENG_DEBUG("Logger initialized...");
 
-	auto app = Nibble::InitilizeEngine();
+	auto eng = Nibble::InitilizeEngine();
 
-	app->Run();
+	eng->Run();
 
-	delete app;
+	delete eng;
 }
 
 #endif // NIBBLE_PLATFORM_WINDOWS

@@ -5,7 +5,7 @@
 #include "Layer/LayerStack.h"
 
 namespace Nibble {
-	class NIBBLE_API EventBus {
+	class NIBBLE_EXPORT_API EventBus {
 	private:
 		static EventBus s_Instance;
 		std::vector<std::shared_ptr<Event>> m_Events;
