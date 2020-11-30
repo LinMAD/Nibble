@@ -16,7 +16,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\TestLayer.h">
+    <ClInclude Include="src\TriangleLayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

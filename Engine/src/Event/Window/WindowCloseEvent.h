@@ -3,7 +3,7 @@
 #include "Event/Event.h"
 
 namespace Nibble {
-	class NIBBLE_EXPORT_API WindowsCloseEvent : public Event {
+	class WindowsCloseEvent : public Event {
 	public:
 		// Inherited via Event
 		virtual void SetIsHandled() override;

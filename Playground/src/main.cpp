@@ -1,5 +1,5 @@
 #include "Nibble.h"
-#include "TestLayer.h"
+#include "TriangleLayer.h"
 
 namespace Playground {
 	class ClientApplication : public Nibble::Engine
@@ -7,12 +7,12 @@ namespace Playground {
 	public:
 		ClientApplication()
 		{
-			//PushLayer(std::make_shared<TestLayer>());
+			LOGGER_CLIENT_DEBUG("Preparing to create triangle...");
+			PushLayer(std::make_shared<TriangleLayer>());
 		}
 		~ClientApplication() {}
 	};
 }
-
 
 // Executing main entry
 Nibble::Engine* Nibble::InitilizeEngine()

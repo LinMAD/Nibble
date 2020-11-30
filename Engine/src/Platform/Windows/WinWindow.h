@@ -1,10 +1,13 @@
 #pragma once
-#include "Platform/IWindow.h"
-#include "Graphic/OpenGL/OpenGLContext.h"
+#include "Platform/Window.h"
+#include "Graphic/OpenGL/GLContext.h"
 #include <GLFW/glfw3.h>
 
 namespace Nibble {
-	class WinWindow : public IWindow {
+	/// <summary>
+	/// Implementaion of Windows window
+	/// </summary>
+	class WinWindow : public Window {
 	private:
 		struct WindowData
 		{
@@ -66,7 +69,7 @@ namespace Nibble {
 		WinWindow(const WindowConfiguration& cfg);
 		~WinWindow();
 
-		virtual IWindow* Create(const WindowConfiguration& props = WindowConfiguration()) override;
+		virtual Window* Create(const WindowConfiguration& props = WindowConfiguration()) override;
 
 		void OnUpdate() override;
 

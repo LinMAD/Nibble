@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Layer/ILayer.h"
+#include "Layer/Layer.h"
 
 namespace Nibble {
-	class GuiLayer : public ILayer {
+	class GuiLayer : public Layer {
 	public:
 		GuiLayer();
 		~GuiLayer();

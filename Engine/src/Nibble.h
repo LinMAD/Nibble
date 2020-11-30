@@ -1,10 +1,18 @@
 #pragma once
 
-#include "Core/Engine.h"
 #include "Traceability/Logger.h"
-#include "Layer/ILayer.h"
+
+#include "Layer/Layer.h"
 #include "Layer/Gui/GuiLayer.h"
 
-// Entry point for other applications
+#include "Scene/SceneManager.h"
+#include "Scene/Camera/OrthographicCamera.h"
+#include "Scene/Camera/OrthographicCameraController.h"
+
+#include "Graphic/Shader.h"
+#include "Graphic/OpenGL/GLShader.h"
+#include "Graphic/Data/ShaderContainer.h"
+
+#include "Core/DeltaTime.h"
+#include "Core/Engine.h"
 #include "Core/EngineMainEntry.h"
-// End of entry point

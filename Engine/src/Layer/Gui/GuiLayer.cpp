@@ -8,7 +8,7 @@
 #include "Core/Engine.h"
 
 namespace Nibble {
-	GuiLayer::GuiLayer() : ILayer("GUI Layer")
+	GuiLayer::GuiLayer() : Layer("GUI Layer")
 	{
 	}
 
@@ -48,26 +48,6 @@ namespace Nibble {
 
 	void GuiLayer::OnGuiUpdate()
 	{
-		
-		{
-			static float f = 0.0f;
-			static int counter = 0;
-
-			ImGui::Begin("Custom window");
-			ImGui::Text("This is some useful text.");
-			ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
-
-			if (ImGui::Button("Button")) counter++;
-
-			ImGui::SameLine();
-			ImGui::Text("counter = %d", counter);
-
-			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-			ImGuiStyle& style = ImGui::GetStyle();
-			style.WindowRounding = 0.0f;
-			style.Colors[ImGuiCol_WindowBg].w = 1.0f;
-			ImGui::End();
-		}
 	}
 
 	void GuiLayer::BiginFrameRender()

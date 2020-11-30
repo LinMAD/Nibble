@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sstream>
+#include <fstream>
 #include <memory>
 #include <utility>
 #include <algorithm>

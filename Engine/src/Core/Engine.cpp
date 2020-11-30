@@ -1,88 +1,82 @@
 #include "pch.h"
 #include "Engine.h"
+#include "DeltaTime.h"
 #include "Traceability/Logger.h"
-#include "glad/glad.h"
 
-Nibble::Engine* Nibble::Engine::s_Instance = nullptr;
+#ifdef NIBBLE_PLATFORM_WINDOWS
+#include "Platform/Windows/WinWindow.h"
+#endif // NIBBLE_PLATFORM_WINDOWS
 
-Nibble::Engine::Engine()
-{
-	M_NIBBLE_ENG_ASSERT(!s_Instance, "Nibble enigne instance already exists!");
-	s_Instance = this;
+namespace Nibble {
+	Engine* Nibble::Engine::s_Instance = nullptr;
 
-	WinWindow window;
-	m_Window = std::unique_ptr<IWindow>(window.Create());
-
-	m_GuiLayer = std::make_shared<GuiLayer>();
-	PushLayer(m_GuiLayer);
-
-	glGenVertexArrays(1, &m_VertexArray);
-	glBindVertexArray(m_VertexArray);
-
-	glGenBuffers(1, &m_VertexBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, m_VertexBuffer);
-
-	float vertices[3 * 3] = {
-		-0.5f, -0.5f, 0.0f,
-		 0.5f, -0.5f, 0.0f,
-		 0.0f,  0.5f, 0.0f,
-	};
-
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
-
-	glGenBuffers(1, &m_IndexBuffer);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBuffer);
-
-	unsigned int indices[3] = { 0, 1, 2 };
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-}
-
-void Nibble::Engine::PushLayer(std::shared_ptr<ILayer> l)
-{
-	m_LayerStack.PushLayer(l);
-}
-
-void Nibble::Engine::PushOverlay(std::shared_ptr<ILayer> ol)
-{
-	m_LayerStack.PushOverlay(ol);
-}
-
-void Nibble::Engine::Run()
-{
-	M_LOGGER_ENG_DEBUG("Executing main loop...");
-	EventBus& bus = Nibble::EventBus::GetInstance();
-
-	// Main loop
-	while (m_Running)
+	Engine::Engine()
 	{
-		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		M_NIBBLE_ENG_ASSERT(!s_Instance, "Nibble enigne instance already exists!");
+		s_Instance = this;
 
-		glBindVertexArray(m_VertexArray);
-		glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
+		#ifdef NIBBLE_PLATFORM_WINDOWS
+		WinWindow window;
+		m_Window = std::unique_ptr<Window>(window.Create());
+		#endif // NIBBLE_PLATFORM_WINDOWS
 
-		// Verify if the main loop must be closed
-		std::shared_ptr<Event> winClose = bus.DispatchEvent(Event::EventType::WindowClose);
-		if (winClose != nullptr && winClose->IsHandled()) break;
+		m_GuiLayer = std::make_shared<GuiLayer>();
+		PushLayer(m_GuiLayer);
+	}
 
-		// Notify listeners on event
-		bus.Process(m_LayerStack);
+	Engine::~Engine()
+	{
+	}
 
-		// Update
-		for (std::shared_ptr<ILayer> l : m_LayerStack)
+	void Engine::PushLayer(std::shared_ptr<Layer> l)
+	{
+		m_LayerStack.PushLayer(l);
+	}
+
+	void Engine::PushOverlay(std::shared_ptr<Layer> ol)
+	{
+		m_LayerStack.PushOverlay(ol);
+	}
+
+	void Engine::Run()
+	{
+		M_LOGGER_ENG_DEBUG("Executing main engine loop...");
+		EventBus& bus = Nibble::EventBus::GetInstance();
+
+		// Main loop
+		while (m_Running)
 		{
-			if (l == nullptr) continue;
-			l->OnUpdate();
+			float currentTime;
+
+			#ifdef NIBBLE_PLATFORM_WINDOWS
+			currentTime = (float)glfwGetTime();
+			#endif // NIBBLE_PLATFORM_WINDOWS
+
+			DeltaTime deltaTime = currentTime - m_LastFrameTimeInSeconds;
+			m_LastFrameTimeInSeconds = currentTime;
+
+			// Verify if the main loop must be closed
+			std::shared_ptr<Event> winClose = bus.DispatchEvent(Event::EventType::WindowClose);
+			if (winClose != nullptr && winClose->IsHandled()) break;
+
+			// Notify listeners on event
+			bus.Process(m_LayerStack);
+
+			// Update
+			for (std::shared_ptr<Layer> l : m_LayerStack)
+			{
+				if (l == nullptr) continue;
+				l->OnUpdate(deltaTime);
+			}
+
+			m_GuiLayer->BiginFrameRender();
+			for (std::shared_ptr<Layer> l : m_LayerStack)
+			{
+				l->OnGuiUpdate();
+			}
+			m_GuiLayer->EndFrameRender();
+
+			m_Window->OnUpdate();
 		}
-
-		m_GuiLayer->BiginFrameRender();
-		for (std::shared_ptr<ILayer> l : m_LayerStack)
-			l->OnGuiUpdate();
-		m_GuiLayer->EndFrameRender();
-
-		m_Window->OnUpdate();
 	}
 }

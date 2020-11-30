@@ -3,7 +3,10 @@
 #include "Core/MacroCore.h"
 
 namespace Nibble {
-	class NIBBLE_EXPORT_API Event {
+	/// <summary>
+	/// Abstract event
+	/// </summary>
+	class Event {
 	public:
 		enum EventType
 		{
@@ -24,6 +27,9 @@ namespace Nibble {
 			MouseButton = 1 << 5,
 		};
 
+		/// <summary>
+		/// Set if event was handled somwhere
+		/// </summary>
 		virtual void SetIsHandled() = 0;
 		inline bool IsHandled()
 		{

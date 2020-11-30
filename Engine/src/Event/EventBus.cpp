@@ -44,7 +44,7 @@ namespace Nibble {
 			std::shared_ptr<Event> eventInQ = *eventIter;
 			if (eventInQ == nullptr) continue;
 
-			for (std::shared_ptr<ILayer> l : ls) 
+			for (std::shared_ptr<Layer> l : ls) 
 				l->OnEvent(*eventInQ);
 
 			eventIter = m_Events.erase(eventIter);

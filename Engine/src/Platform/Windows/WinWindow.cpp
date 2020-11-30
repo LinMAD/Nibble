@@ -146,7 +146,7 @@ namespace Nibble {
 		glfwDestroyWindow(m_Window);
 	}
 
-	IWindow* WinWindow::Create(const WindowConfiguration& cfg)
+	Window* WinWindow::Create(const WindowConfiguration& cfg)
 	{
 		return new WinWindow(cfg);
 	}

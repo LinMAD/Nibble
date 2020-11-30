@@ -19,13 +19,13 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -73,7 +73,8 @@
       <AdditionalLibraryDirectories>$(SolutionDir)Engine\extern\glfw\lib-vc2019;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(SolutionDir)Engine\extern\glfw\lib-vc2019\glfw3.lib" "$(OutDir)" /Y</Command>
+      <Command>
+      </Command>
       <Message>
       </Message>
     </PostBuildEvent>
@@ -100,7 +101,8 @@
       <AdditionalLibraryDirectories>$(SolutionDir)Engine\extern\glfw\lib-vc2019;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(SolutionDir)Engine\extern\glfw\lib-vc2019\glfw3.lib" "$(OutDir)" /Y</Command>
+      <Command>
+      </Command>
       <Message>
       </Message>
     </PostBuildEvent>
@@ -112,8 +114,19 @@
     <None Include="..\README.md" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Core\DeltaTime.h" />
+    <ClInclude Include="src\Platform\Platform.h" />
+    <ClInclude Include="src\Scene\Camera\OrthographicCameraController.h" />
+    <ClInclude Include="src\Scene\Camera\OrthographicCamera.h" />
+    <ClInclude Include="src\Scene\SceneManager.h" />
+    <ClInclude Include="src\Graphic\OpenGL\GLRenderer.h" />
+    <ClInclude Include="src\Graphic\OpenGL\GLShader.h" />
+    <ClInclude Include="src\Graphic\Renderer.h" />
+    <ClInclude Include="src\Graphic\OpenGL\GLBufferObject.h" />
+    <ClInclude Include="src\Graphic\BufferObject.h" />
     <ClInclude Include="extern\imgui\imconfig.h" />
-    <ClInclude Include="src\Graphic\OpenGL\OpenGLContext.h" />
+    <ClInclude Include="src\Graphic\Shader.h" />
+    <ClInclude Include="src\Graphic\OpenGL\GLContext.h" />
     <ClInclude Include="src\Event\Keyboard\KeyTypedEvent.h" />
     <ClInclude Include="src\Event\Keyboard\KeyReleasedEvent.h" />
     <ClInclude Include="src\Event\Keyboard\KeyPressedEvent.h" />
@@ -123,9 +136,9 @@
     <ClInclude Include="src\Event\Mouse\MouseButtonReleasedEvent.h" />
     <ClInclude Include="src\Event\Mouse\MouseButtonEvent.h" />
     <ClInclude Include="src\Event\Mouse\MouseButtonPressedEvent.h" />
-    <ClInclude Include="src\Graphic\IGraphicsContext.h" />
+    <ClInclude Include="src\Graphic\GraphicsContext.h" />
     <ClInclude Include="src\Layer\LayerStack.h" />
-    <ClInclude Include="src\Layer\ILayer.h" />
+    <ClInclude Include="src\Layer\Layer.h" />
     <ClInclude Include="src\Event\Event.h" />
     <ClInclude Include="src\Event\EventBus.h" />
     <ClInclude Include="src\Core\Engine.h" />
@@ -133,13 +146,13 @@
     <ClInclude Include="src\Event\Window\WindowResizeEvent.h" />
     <ClInclude Include="src\pch.h" />
     <ClInclude Include="src\Layer\Gui\GuiLayer.h" />
-    <ClInclude Include="src\Platform\IWindow.h" />
+    <ClInclude Include="src\Platform\Window.h" />
     <ClInclude Include="src\Platform\Windows\WinWindow.h" />
     <ClInclude Include="src\Traceability\Logger.h" />
-    <ClInclude Include="src\Core\MacroPlatform.h" />
     <ClInclude Include="src\Core\MacroCore.h" />
     <ClInclude Include="src\Nibble.h" />
     <ClInclude Include="src\Event\Window\WindowCloseEvent.h" />
+    <ClInclude Include="src\Graphic\Data\ShaderContainer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="extern\imgui\backends\imgui_impl_glfw.cpp" />
@@ -148,7 +161,15 @@
     <ClCompile Include="extern\imgui\imgui_demo.cpp" />
     <ClCompile Include="extern\imgui\imgui_draw.cpp" />
     <ClCompile Include="extern\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="src\Graphic\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="src\Graphic\OpenGL\GLShader.cpp" />
+    <ClCompile Include="src\Scene\Camera\OrthographicCameraController.cpp" />
+    <ClCompile Include="src\Scene\Camera\OrthographicCamera.cpp" />
+    <ClCompile Include="src\Scene\SceneManager.cpp" />
+    <ClCompile Include="src\Graphic\OpenGL\GLRenderer.cpp" />
+    <ClCompile Include="src\Graphic\Renderer.cpp" />
+    <ClCompile Include="src\Graphic\OpenGL\GLBufferObject.cpp" />
+    <ClCompile Include="src\Graphic\BufferObject.cpp" />
+    <ClCompile Include="src\Graphic\OpenGL\GLContext.cpp" />
     <ClCompile Include="src\Event\Keyboard\KeyTypedEvent.cpp" />
     <ClCompile Include="src\Event\Keyboard\KeyReleasedEvent.cpp" />
     <ClCompile Include="src\Event\Keyboard\KeyPressedEvent.cpp" />
@@ -156,6 +177,7 @@
     <ClCompile Include="src\Event\Mouse\MouseMovedEvent.cpp" />
     <ClCompile Include="src\Event\Mouse\MouseButtonPressedEvent.cpp" />
     <ClCompile Include="src\Event\Mouse\MouseButtonReleasedEvent.cpp" />
+    <ClCompile Include="src\Graphic\Shader.cpp" />
     <ClCompile Include="src\Layer\LayerStack.cpp" />
     <ClCompile Include="src\Core\Engine.cpp" />
     <ClCompile Include="src\Event\EventBus.cpp" />
@@ -174,6 +196,7 @@
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsCpp</CompileAs>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">CompileAsCpp</CompileAs>
     </ClCompile>
+    <ClCompile Include="src\Graphic\Data\ShaderContainer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

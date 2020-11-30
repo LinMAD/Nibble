@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Graphic/IGraphicsContext.h"
+#include "Graphic/GraphicsContext.h"
 
 struct GLFWwindow;
 
 namespace Nibble {
-	class OpenGLContext : public IGraphicsContext {
+	class OpenGLContext : public GraphicsContext {
 	public:
 		OpenGLContext(GLFWwindow* window);
 

@@ -2,9 +2,12 @@
 
 #include "pch.h"
 #include "Core/MacroCore.h"
-#include "Graphic/IGraphicsContext.h"
+#include "Graphic/GraphicsContext.h"
 
 namespace Nibble {
+	/// <summary>
+	/// Core data about applicaiton window
+	/// </summary>
 	struct WindowConfiguration
 	{
 		std::string Title;
@@ -21,7 +24,10 @@ namespace Nibble {
 		}
 	};
 
-	class NIBBLE_EXPORT_API IWindow
+	/// <summary>
+	/// Iterface for application window
+	/// </summary>
+	class Window
 	{
 	public:
 		virtual void OnUpdate() = 0;
@@ -33,8 +39,8 @@ namespace Nibble {
 		virtual void SetVSync(bool enabled) = 0;
 		virtual bool IsVSync() const = 0;
 
-		virtual IWindow* Create(const WindowConfiguration& props = WindowConfiguration()) = 0;
+		virtual Window* Create(const WindowConfiguration& props = WindowConfiguration()) = 0;
 	protected:
-		IGraphicsContext* m_GraphicsContext;
+		GraphicsContext* m_GraphicsContext;
 	};
 }

@@ -57,20 +57,25 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NIBBLE_PLATFORM_WINDOWS;_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine\src;$(SolutionDir)Engine\extern\spdlog\include;$(SolutionDir)Engine\extern\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\src;$(SolutionDir)Engine\extern\spdlog\include;$(SolutionDir)Engine\extern\glad\include;$(SolutionDir)Engine\extern\glfw\include;$(SolutionDir)Engine\extern\glm;$(SolutionDir)Engine\extern\imgui;$(SolutionDir)Engine\extern\glfw\include;$(SolutionDir)Engine\extern\glm;$(SolutionDir)Engine\extern\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)Engine\extern\glfw\lib-vc2019;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;Nibble.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(SolutionDir)Engine\extern\glfw\include;$(OutDir)</AdditionalLibraryDirectories>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(SolutionDir)bin\$(Configuration)-$(Platform)\Nibble\Nibble.dll" "$(OutDir)" /Y</Command>
+      <Command>xcopy "$(SolutionDir)Engine\extern\glfw\lib-vc2019\glfw3.lib" "$(OutDir)" /Y;
+xcopy "$(SolutionDir)bin\$(Configuration)-$(Platform)\Nibble\Nibble.lib" "$(OutDir)" /Y</Command>
       <Message>Copy dependencies</Message>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(SolutionDir)Engine\extern\glfw\lib-vc2019\glfw3.lib" "$(OutDir)" /Y;
+xcopy "$(SolutionDir)bin\$(Configuration)-$(Platform)\Nibble\Nibble.lib" "$(OutDir)" /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -78,22 +83,27 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NIBBLE_PLATFORM_WINDOWS;_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Engine\src;$(SolutionDir)Engine\extern\spdlog\include;$(SolutionDir)Engine\extern\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\src;$(SolutionDir)Engine\extern\spdlog\include;$(SolutionDir)Engine\extern\glad\include;$(SolutionDir)Engine\extern\glfw\include;$(SolutionDir)Engine\extern\glm;$(SolutionDir)Engine\extern\imgui;$(SolutionDir)Engine\extern\glad\include;$(SolutionDir)Engine\extern\glfw\include;$(SolutionDir)Engine\extern\glm;$(SolutionDir)Engine\extern\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Engine\extern\glfw\lib-vc2019;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(SolutionDir)Engine\extern\glfw\include;$(OutDir)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;Nibble.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PreBuildEvent>
-      <Command>xcopy "$(SolutionDir)bin\$(Configuration)-$(Platform)\Nibble\Nibble.dll" "$(OutDir)" /Y</Command>
+      <Command>xcopy "$(SolutionDir)Engine\extern\glfw\lib-vc2019\glfw3.lib" "$(OutDir)" /Y;
+xcopy "$(SolutionDir)bin\$(Configuration)-$(Platform)\Nibble\Nibble.lib" "$(OutDir)" /Y</Command>
       <Message>Copy dependencies</Message>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>xcopy "$(SolutionDir)Engine\extern\glfw\lib-vc2019\glfw3.lib" "$(OutDir)" /Y;
+xcopy "$(SolutionDir)bin\$(Configuration)-$(Platform)\Nibble\Nibble.lib" "$(OutDir)" /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ProjectReference Include="..\Engine\Nibble.vcxproj">
@@ -104,7 +114,7 @@
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\TestLayer.h" />
+    <ClInclude Include="src\TriangleLayer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
